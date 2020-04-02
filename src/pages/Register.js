@@ -100,7 +100,7 @@ function Register() {
                     <View style={styles.button}>
                         <Button
                             title={'Cadastrar'}
-                            color={'#666666'}
+                            color={'#3B3F8C'}
                         />
                     </View>
                     <View style={{ height: 30 }}></View>

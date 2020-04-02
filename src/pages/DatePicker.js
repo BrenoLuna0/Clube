@@ -61,7 +61,7 @@ function DatePicker({ navigation }) {
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
@@ -108,11 +108,12 @@ const styles = StyleSheet.create({
 
     text: {
         fontSize: 18,
-        textAlign: 'center'
+        textAlign: 'center',
+        color : '#F2EFEA'
     },
 
     button: {
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
         marginTop: 1,
         height: 45,
         width: '60%',
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     titleBar: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#D91122',
         marginTop: 20,
         width: '100%',
         height: 60

@@ -178,7 +178,8 @@ const stylesLocal = StyleSheet.create({
     },
 
     text: {
-        fontSize: 18
+        fontSize: 18,
+        color : '#F2EFEA'
     },
 
     button: {
@@ -186,7 +187,7 @@ const stylesLocal = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignItems: 'center',
-        backgroundColor: '#666666',
+        backgroundColor: '#3B3F8C',
         padding: 10
     },
 
@@ -203,7 +204,7 @@ const stylesLocal = StyleSheet.create({
     welcomeBar: {
         alignItems: 'center',
         justifyContent: "center",
-        backgroundColor: '#666666',
+        backgroundColor: '#D91122',
         height: 50,
         width: '100%',
     },
@@ -217,7 +218,7 @@ const stylesLocal = StyleSheet.create({
     buttonTopLeft: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#666666',
+        backgroundColor: '#3B3F8C',
         position: 'absolute',
         top: 0,
         left: 0,
@@ -228,7 +229,7 @@ const stylesLocal = StyleSheet.create({
     buttonTopRight: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#666666',
+        backgroundColor: '#3B3F8C',
         position: 'absolute',
         top: 0,
         right: 0,
@@ -239,7 +240,7 @@ const stylesLocal = StyleSheet.create({
     buttonBottomLeft: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#666666',
+        backgroundColor: '#3B3F8C',
         position: 'absolute',
         bottom: 0,
         left: 0,
@@ -250,7 +251,7 @@ const stylesLocal = StyleSheet.create({
     buttonBottomRight: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#666666',
+        backgroundColor: '#3B3F8C',
         position: 'absolute',
         bottom: 0,
         right: 0,

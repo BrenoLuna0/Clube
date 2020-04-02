@@ -88,7 +88,7 @@ function Guests({ navigation }) {
                                         setModalVisible(false);
                                     }}
                                     title={'Adicionar Convidado'}
-                                    color={'#666666'}
+                                    color={'#03A64A'}
                                 />
                             </View>
                             <View style={{ marginTop: 7 }}>
@@ -98,7 +98,7 @@ function Guests({ navigation }) {
                                         setModalVisible(false);
                                     }}
                                     title={'Convidados Recentes'}
-                                    color={'#666666'}
+                                    color={'#3B3F8C'}
                                 />
                             </View>
                         </View>
@@ -111,7 +111,7 @@ function Guests({ navigation }) {
                             setModalGuestsVisible(false);
                         }}>
                         <View style={styles.modalScrollContainer}>
-                            <ScrollView style={{ backgroundColor: '#666666' }}>
+                            <ScrollView style={{ backgroundColor: '#F2EFEA' }}>
                                 <View style={{ height: '100%' }}>
                                     <View style={styles.guestBlockScroll}>
                                         <TouchableOpacity
@@ -225,7 +225,7 @@ function Guests({ navigation }) {
                                                 remount();
                                             }}
                                         >
-                                            <Text>X</Text>
+                                            <Text style={styles.text}>X</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -238,7 +238,7 @@ function Guests({ navigation }) {
                                     setModalVisible(true);
                                 }}
                             >
-                                <Text>+</Text>
+                                <Text style={styles.text}>+</Text>
                             </TouchableOpacity>
                         </View>
                     </ScrollView>
@@ -249,7 +249,7 @@ function Guests({ navigation }) {
                                 //setModalVisible(true);
                             }}
                         >
-                            <Text>Salvar</Text>
+                            <Text style={styles.text}>Salvar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -261,7 +261,7 @@ function Guests({ navigation }) {
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
@@ -280,11 +280,12 @@ const styles = StyleSheet.create({
 
     text: {
         fontSize: 18,
-        textAlign: 'center'
+        textAlign: 'center',
+        color : '#F2EFEA'
     },
 
     buttonContainer: {
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#03A64A',
         marginTop: 5,
         width: 50,
         borderRadius: 7,
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
     },
 
     guestRemove: {
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#D91122',
         marginTop: 9,
         width: 50,
         borderRadius: 7,
@@ -319,7 +320,7 @@ const styles = StyleSheet.create({
     titleBar: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#D91122',
         marginTop: 10,
         width: '100%',
         height: 60
@@ -329,7 +330,7 @@ const styles = StyleSheet.create({
         bottom: 45,
         width: '80%',
         height: 45,
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
     },
     scrollContainer: {
         position: 'absolute',
@@ -341,8 +342,11 @@ const styles = StyleSheet.create({
     modalContainer: {
         marginTop: '43%',
         height: 250,
-        backgroundColor: '#666666',
-        width: '100%'
+        backgroundColor: '#F2EFEA',
+        width: '100%',
+        borderStyle : 'solid',
+        borderWidth : 2,
+        borderColor : '#3B3F8C'
     },
 
     modalScrollContainer: {
@@ -375,14 +379,14 @@ const styles = StyleSheet.create({
     guestBlock: {
         height: 50,
         width: '80%',
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
         marginTop: 9,
     },
 
     guestBlockScroll: {
         height: 55,
         width: '100%',
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
         marginTop: 9,
         borderRadius: 7,
     },
@@ -394,7 +398,8 @@ const styles = StyleSheet.create({
     guestText: {
         marginTop: 3,
         fontSize: 14,
-        marginLeft: 10
+        marginLeft: 10,
+        color : '#F2EFEA'
     }
 });
 

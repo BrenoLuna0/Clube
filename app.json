@@ -30,6 +30,7 @@
     "android": {
       "package": "com.csm.clube",
       "versionCode": 1
-    }
+    },
+    "description": ""
   }
 }

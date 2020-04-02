@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Linking } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Linking, Image } from 'react-native';
 import { onSignIn } from '../services/auth';
 
 function Login({ navigation }) {
@@ -10,7 +10,10 @@ function Login({ navigation }) {
         <>
             <View style={styles.header}>
                 <View style={styles.containerChild}>
-
+                    <Image
+                        style={styles.containerChildImage}
+                        source={require('../../assets/club_logo.png')}
+                    />
                 </View>
             </View>
             <View style={styles.login}>
@@ -35,10 +38,10 @@ function Login({ navigation }) {
                 <View style={styles.button}>
                     <Button
                         onPress={async () => {
-                            onSignIn(email, senha).then(() => navigation.navigate('Home', {  })).catch((err) => { console.log('ERROOOOO') });
+                            onSignIn(email, senha).then(() => navigation.navigate('Home', {})).catch((err) => { console.log('ERROOOOO') });
                         }}
                         title={'Entrar'}
-                        color={'#666666'}
+                        color={'#3B3F8C'}
                     />
                 </View>
                 <Text style={styles.link}>
@@ -52,7 +55,7 @@ function Login({ navigation }) {
 
                         }}
                         title={'Cadastrar'}
-                        color={'#666666'} />
+                        color={'#3B3F8C'} />
                 </View>
             </View>
         </>
@@ -61,7 +64,7 @@ function Login({ navigation }) {
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
         alignItems: 'center',
         position: 'relative',
         width: '100%',
@@ -70,12 +73,21 @@ const styles = StyleSheet.create({
 
     containerChild: {
         position: 'absolute',
-        backgroundColor: '#666666',
+        backgroundColor: '#F2EFEA',
         justifyContent: 'center',
         borderRadius: 85,
         width: 170,
         height: 170,
         bottom: -85
+    },
+
+    containerChildImage: {
+        position: 'absolute',
+        backgroundColor: '#F2EFEA',
+        justifyContent: 'center',
+        borderRadius: 85,
+        width: 170,
+        height: 170,
     },
 
     login: {

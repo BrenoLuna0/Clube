@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        backgroundColor: '#8c8c8c',
+        backgroundColor: '#3B3F8C',
         alignItems: 'center',
         position: 'relative',
         width: '100%',
