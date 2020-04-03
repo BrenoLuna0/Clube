@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Linking, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Linking, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { onSignIn } from '../services/auth';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import api from '../services/api';
 
 function Login({ navigation }) {
-    const [email, setEmail] = useState('Email');
-    const [senha, setSenha] = useState('Senha');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
     return (
         <>
@@ -19,7 +21,7 @@ function Login({ navigation }) {
             <View style={styles.login}>
                 <View style={styles.inputBlock}>
                     <Text style={styles.text}>
-                        Email
+                        Número do Titular
                     </Text>
                     <TextInput
                         keyboardType={'email-address'}
@@ -38,7 +40,19 @@ function Login({ navigation }) {
                 <View style={styles.button}>
                     <Button
                         onPress={async () => {
-                            onSignIn(email, senha).then(() => navigation.navigate('Home', {})).catch((err) => { console.log('ERROOOOO') });
+                            api.post('/usuario', {
+                                codigo: email,
+                                senha: senha
+                            }).then(function (response) {
+                                if (response.data) {
+                                    navigation.navigate('Home', {});
+                                }else{
+                                    alert('Numero de titular ou senha inválida');
+                                }
+                            }).catch(function (err) {
+                                console.log(err);
+                            });
+                            //onSignIn(email, senha).then(() => navigation.navigate('Home', {})).catch((err) => { console.log('ERROOOOO') });
                         }}
                         title={'Entrar'}
                         color={'#3B3F8C'}
