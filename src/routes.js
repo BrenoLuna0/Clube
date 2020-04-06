@@ -9,7 +9,64 @@ import Guests from '../src/pages/Guests';
 import Activities from '../src/pages/Activities';
 import Schedulles from '../src/pages/Schedulles';
 
-export const SignedOutRoutes = createStackNavigator({
+const Routes = createAppContainer(
+    createStackNavigator({
+        Login: {
+            screen: Login,
+            navigationOptions: {
+                title: '',
+                headerShown: false
+            }
+        },
+        Register: {
+            screen: Register,
+            navigationOptions: {
+                title: '',
+                headerShown: false
+            }
+        },
+        Home: {
+            screen: Home,
+            navigationOptions: {
+                title: '',
+                headerShown: false
+            }
+        },
+        DatePicker: {
+            screen: DatePicker,
+            navigationOptions: {
+                title: '',
+                headerShown: false
+            }
+        },
+        Guests: {
+            screen: Guests,
+            navigationOptions: {
+                title: '',
+                headerShown: false
+            }
+        },
+        Activities: {
+            screen: Activities,
+            navigationOptions: {
+                title: '',
+                headerShown: false
+            }
+        },
+        Schedulles: {
+            screen: Schedulles,
+            navigationOptions: {
+                title: '',
+                headerShown: false,
+                
+            }
+        },
+    })
+);
+
+export default Routes;
+
+/*export const SignedOutRoutes = createStackNavigator({
     Login: {
         screen: Login,
         navigationOptions: {
@@ -83,4 +140,4 @@ export const createRootNavigator = (signedIn = false) => {
                 }
             })
     );
-};
+};*/

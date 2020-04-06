@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Linking, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Image, KeyboardAvoidingView } from 'react-native';
 import { onSignIn } from '../services/auth';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import api from '../services/api';
+import { TextInputMask } from 'react-native-masked-text';
+
+const IMAGE_HEIGHT = window.width / 2;
+const IMAGE_HEIGHT_SMALL = window.width / 7;
+
 
 function Login({ navigation }) {
-    const [email, setEmail] = useState('');
+    const [numTitulo, setNumTitulo] = useState('');
     const [senha, setSenha] = useState('');
 
     return (
-        <>
+
+        <KeyboardAvoidingView
+            style={styles.containerMaster}
+            behavior="padding"
+        >
             <View style={styles.header}>
                 <View style={styles.containerChild}>
                     <Image
@@ -18,65 +25,89 @@ function Login({ navigation }) {
                     />
                 </View>
             </View>
-            <View style={styles.login}>
-                <View style={styles.inputBlock}>
-                    <Text style={styles.text}>
-                        Número do Titular
+            <View style={{ marginTop: 100 }}></View>
+            <View style={styles.inputBlock}>
+                <Text style={styles.text}>
+                    Número do Titular
                     </Text>
-                    <TextInput
-                        keyboardType={'email-address'}
-                        onChangeText={email => setEmail(email)}
-                        style={styles.input} />
-                </View>
-                <View style={styles.inputBlock}>
-                    <Text style={styles.text}>
-                        Senha
+                <TextInputMask
+                    keyboardType={'number-pad'}
+                    type={'custom'}
+                    options={{
+                        mask: '999999999'
+                    }}
+                    value={numTitulo}
+                    onChangeText={text => {
+                        setNumTitulo(text)
+                    }}
+                    style={styles.input}
+                />
+            </View>
+            <View style={styles.inputBlock}>
+                <Text style={styles.text}>
+                    Senha
                     </Text>
-                    <TextInput
-                        secureTextEntry={false}
-                        onChangeText={senha => setSenha(senha)}
-                        style={styles.input} />
-                </View>
-                <View style={styles.button}>
-                    <Button
-                        onPress={async () => {
-                            api.post('/usuario', {
-                                codigo: email,
-                                senha: senha
-                            }).then(function (response) {
-                                if (response.data) {
-                                    navigation.navigate('Home', {});
-                                }else{
-                                    alert('Numero de titular ou senha inválida');
-                                }
-                            }).catch(function (err) {
-                                console.log(err);
-                            });
-                            //onSignIn(email, senha).then(() => navigation.navigate('Home', {})).catch((err) => { console.log('ERROOOOO') });
-                        }}
-                        title={'Entrar'}
-                        color={'#3B3F8C'}
-                    />
-                </View>
-                <Text style={styles.link}>
-                    Esqueceu a senha?
+                <TextInput
+                    value={senha}
+                    secureTextEntry={true}
+                    onChangeText={senha => setSenha(senha)}
+                    style={styles.input} />
+            </View>
+            <View style={styles.button}>
+                <Button
+                    onPress={async () => {
+                        const result = await onSignIn(numTitulo, senha);
+                        if (result) {
+                            setNumTitulo('');
+                            setSenha('');
+                            navigation.navigate('Home', {});
+                        }else{
+                            alert('Numero de titular ou senha inválida');
+                        }
+                    }}
+                    title={'Entrar'}
+                    color={'#3B3F8C'}
+                />
+            </View>
+            <Text style={styles.link}>
+                Esqueceu a senha?
                 </Text>
 
-                <View style={styles.register}>
-                    <Button
-                        onPress={() => {
-                            onSignIn(email, senha).then((usuario) => navigation.navigate('Register', { usuario }).catch((err) => { console.log('ERROOOOO') }));
+            <View style={styles.register}>
+                <Button
+                    onPress={() => {
+                        onSignIn(email, senha).then((usuario) => navigation.navigate('Register', { usuario }).catch((err) => { console.log('ERROOOOO') }));
 
-                        }}
-                        title={'Cadastrar'}
-                        color={'#3B3F8C'} />
-                </View>
+                    }}
+                    title={'Cadastrar'}
+                    color={'#3B3F8C'} />
             </View>
-        </>
+            <View style={{ height: 60 }}></View>
+        </KeyboardAvoidingView>
     )
 }
 
 const styles = StyleSheet.create({
+    containerMaster: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    logo: {
+        height: IMAGE_HEIGHT,
+        resizeMode: 'contain',
+        marginBottom: 20,
+        padding: 10,
+        marginTop: 20
+    },
+    register: {
+        marginBottom: 20,
+        width: window.width - 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 50,
+        backgroundColor: '#ffae',
+    },
     header: {
         backgroundColor: '#3B3F8C',
         alignItems: 'center',
@@ -102,13 +133,6 @@ const styles = StyleSheet.create({
         borderRadius: 85,
         width: 170,
         height: 170,
-    },
-
-    login: {
-        alignItems: 'center',
-        position: 'relative',
-        flex: 1,
-        marginTop: 100
     },
 
     input: {
@@ -145,6 +169,8 @@ const styles = StyleSheet.create({
         marginTop: '10%'
     }
 });
+
+
 
 
 export default Login;
