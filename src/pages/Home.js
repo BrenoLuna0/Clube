@@ -7,33 +7,40 @@ import { sliderWidth, itemWidth } from '../styles/SliderEntry.style';
 import { StyleSheet, View, Text, SafeAreaView, ScrollView, Button, TouchableOpacity, AsyncStorage, BackHandler, Alert } from 'react-native';
 import { ENTRIES1 } from '../static/entries';
 import { isSignedIn, onSignOut } from '../services/auth'
+import { getCurrentRoute } from '../services/navigation'
 
 
 function Home({ navigation }) {
-
-    const backAction = () => {
-        Alert.alert('Aviso!','Deseja sair do aplicativo?', [
-            {
-                text: "Cancelar",
-                onPress: () => null,
-                style: 'cancel'
-            },
-            {
-                text: "Sim",
-                onPress: () => {
-                    onSignOut();
-                    navigation.navigate('Login', {});
-                }
-            }
-        ]);
-
-        return true;
-    }
 
     const SLIDER_1_FIRST_ITEM = 1;
 
     const [slider1ActiveSlide, setSlider1ActiveSlide] = useState(SLIDER_1_FIRST_ITEM);
     const [usuario, setUsuario] = useState('');
+
+    const backAction = () => {
+        const isHome = getCurrentRoute() === 'Home'
+        if (isHome) {
+            Alert.alert('Aviso!', 'Deseja sair do aplicativo?', [
+                {
+                    text: "Cancelar",
+                    onPress: () => null,
+                    style: 'cancel'
+                },
+                {
+                    text: "Sim",
+                    onPress: () => {
+                        onSignOut();
+                        navigation.navigate('Login', {});
+                    }
+                }
+            ]);
+
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
     function _renderItemWithParallax({ item, index }, parallaxProps) {
         return (
@@ -96,12 +103,14 @@ function Home({ navigation }) {
     }
 
     const example1 = mainExample(1, 'Default layout | Loop | Autoplay | Parallax | Scale | Opacity | Pagination with tappable dots');
+    
     React.useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", backAction);
         getNome();
         return () =>
             BackHandler.removeEventListener("hardwareBackPress", backAction);
     }, []);
+    
     return (
         <>
             <SafeAreaView style={styles.safeArea}>

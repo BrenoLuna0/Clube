@@ -6,6 +6,7 @@ const { width, height } = Dimensions.get('window');
 function DatePicker({ navigation }) {
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
+    const [flag, setFlag] = useState(false);
 
     function onDateChange(date, type) {
         if (type === 'END_DATE') {

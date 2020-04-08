@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Image, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Image} from 'react-native';
 import { onSignIn } from '../services/auth';
 import { TextInputMask } from 'react-native-masked-text';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const IMAGE_HEIGHT = window.width / 2;
-const IMAGE_HEIGHT_SMALL = window.width / 7;
 
 
 function Login({ navigation }) {
@@ -13,9 +13,10 @@ function Login({ navigation }) {
 
     return (
 
-        <KeyboardAvoidingView
-            style={styles.containerMaster}
-            behavior="padding"
+        <KeyboardAwareScrollView
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            contentContainerStyle={styles.containerMaster}
+            scrollEnabled={false}
         >
             <View style={styles.header}>
                 <View style={styles.containerChild}>
@@ -61,7 +62,7 @@ function Login({ navigation }) {
                             setNumTitulo('');
                             setSenha('');
                             navigation.navigate('Home', {});
-                        }else{
+                        } else {
                             alert('Numero de titular ou senha inválida');
                         }
                     }}
@@ -76,14 +77,14 @@ function Login({ navigation }) {
             <View style={styles.register}>
                 <Button
                     onPress={() => {
-                        onSignIn(email, senha).then((usuario) => navigation.navigate('Register', { usuario }).catch((err) => { console.log('ERROOOOO') }));
+                        navigation.navigate('Register', {});
 
                     }}
                     title={'Cadastrar'}
                     color={'#3B3F8C'} />
             </View>
             <View style={{ height: 60 }}></View>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
     )
 }
 

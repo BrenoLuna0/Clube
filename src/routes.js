@@ -1,5 +1,7 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import {navigationRef} from './services/navigation'
 
 import Login from '../src/pages/Login';
 import Register from '../src/pages/Register';
@@ -9,7 +11,7 @@ import Guests from '../src/pages/Guests';
 import Activities from '../src/pages/Activities';
 import Schedulles from '../src/pages/Schedulles';
 
-const Routes = createAppContainer(
+const AppContainer = createAppContainer(
     createStackNavigator({
         Login: {
             screen: Login,
@@ -63,6 +65,8 @@ const Routes = createAppContainer(
         },
     })
 );
+
+const Routes = ()=> {return <AppContainer ref={navigationRef}/>}
 
 export default Routes;
 

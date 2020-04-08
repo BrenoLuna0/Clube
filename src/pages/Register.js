@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Linking, ScrollView } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Linking, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+
+const IMAGE_HEIGHT = window.width / 2;
+const IMAGE_HEIGHT_SMALL = window.width / 7;
 
 function Register() {
     const [numTitulo, setNumTitulo] = useState('');
@@ -10,9 +15,14 @@ function Register() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+
     return (
-        <>
-            <ScrollView>
+        <ScrollView>
+            <KeyboardAwareScrollView
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                contentContainerStyle={styles.container}
+                scrollEnabled={false}
+            >
                 <View style={styles.header}>
                     <View style={styles.containerChild}>
 
@@ -24,7 +34,7 @@ function Register() {
                             Número do Título
                     </Text>
                         <TextInputMask
-                            keyboardType = {'number-pad'}
+                            keyboardType={'number-pad'}
                             type={'custom'}
                             options={{
                                 mask: '9999'
@@ -105,12 +115,17 @@ function Register() {
                     </View>
                     <View style={{ height: 30 }}></View>
                 </View>
-            </ScrollView>
-        </>
+            </KeyboardAwareScrollView>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
+    containerMaster: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     header: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -171,6 +186,8 @@ const styles = StyleSheet.create({
         width: '60%',
     }
 });
+
+
 
 
 export default Register;
