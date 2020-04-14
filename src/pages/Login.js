@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Image} from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Image, StatusBar} from 'react-native';
 import { onSignIn } from '../services/auth';
 import { TextInputMask } from 'react-native-masked-text';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -18,6 +18,7 @@ function Login({ navigation }) {
             contentContainerStyle={styles.containerMaster}
             scrollEnabled={false}
         >
+            <StatusBar backgroundColor='#3B3F8C' barStyle='light-content'/>
             <View style={styles.header}>
                 <View style={styles.containerChild}>
                     <Image

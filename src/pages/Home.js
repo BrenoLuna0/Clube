@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import SliderEntry from '../components/SliderEntry';
 import styles, { colors } from '../styles/index.style';
 import { sliderWidth, itemWidth } from '../styles/SliderEntry.style';
-import { StyleSheet, View, Text, SafeAreaView, ScrollView, Button, TouchableOpacity, AsyncStorage, BackHandler, Alert } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, ScrollView, TouchableOpacity, AsyncStorage, BackHandler, Alert } from 'react-native';
 import { ENTRIES1 } from '../static/entries';
 import { isSignedIn, onSignOut } from '../services/auth'
 import { getCurrentRoute } from '../services/navigation'
@@ -20,7 +20,7 @@ function Home({ navigation }) {
     const backAction = () => {
         const isHome = getCurrentRoute() === 'Home'
         if (isHome) {
-            Alert.alert('Aviso!', 'Deseja sair do aplicativo?', [
+            Alert.alert('Aviso!', 'Deseja voltar para a tela de Login?', [
                 {
                     text: "Cancelar",
                     onPress: () => null,
@@ -36,7 +36,7 @@ function Home({ navigation }) {
             ]);
 
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -103,14 +103,14 @@ function Home({ navigation }) {
     }
 
     const example1 = mainExample(1, 'Default layout | Loop | Autoplay | Parallax | Scale | Opacity | Pagination with tappable dots');
-    
+
     React.useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", backAction);
         getNome();
         return () =>
             BackHandler.removeEventListener("hardwareBackPress", backAction);
     }, []);
-    
+
     return (
         <>
             <SafeAreaView style={styles.safeArea}>
@@ -126,9 +126,11 @@ function Home({ navigation }) {
                 </View>
             </SafeAreaView>
             <View style={stylesLocal.welcomeBar}>
-                <Text style={stylesLocal.text}>
-                    Bem vindo {usuario}
-                </Text>
+                <View style={stylesLocal.welcomebarStyle}>
+                    <Text style={stylesLocal.text}>
+                        Bem vindo {usuario}
+                    </Text>
+                </View>
             </View>
             <View style={stylesLocal.content}>
                 <View style={stylesLocal.actionMenuButtons}>
@@ -221,7 +223,10 @@ const stylesLocal = StyleSheet.create({
 
     text: {
         fontSize: 18,
-        color: '#F2EFEA'
+        color: '#D91122',
+        fontWeight : 'bold',
+        marginLeft : 3,
+        marginRight : 3
     },
 
     button: {
@@ -246,9 +251,19 @@ const stylesLocal = StyleSheet.create({
     welcomeBar: {
         alignItems: 'center',
         justifyContent: "center",
-        backgroundColor: '#D91122',
         height: 50,
         width: '100%',
+    },
+
+    welcomebarStyle : {
+        alignItems: 'center',
+        justifyContent: "center",
+        borderWidth : 2,
+        borderStyle : 'solid',
+        borderColor : '#D91122',
+        borderRadius : 10,
+        height : '100%',
+        
     },
 
     actionMenuButtons: {

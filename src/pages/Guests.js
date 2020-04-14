@@ -14,9 +14,9 @@ function Guests({ navigation }) {
     function addGuest(guest) {
 
         let tmp = guestList.filter(function (gue) {
-            if(gue.cpf === guest.cpf){
+            if (gue.cpf === guest.cpf) {
                 return true;
-            }else {
+            } else {
                 return false
             }
         });
@@ -25,7 +25,7 @@ function Guests({ navigation }) {
             setGuestList(guestList);
             setCpf('');
             setName('');
-        }else {
+        } else {
             alert('Convidado já está presente na lista');
         }
 
@@ -44,11 +44,10 @@ function Guests({ navigation }) {
 
     return (
         <>
-            <View style={styles.header}>
-                <Text style={styles.text}>Convide seus amigos para aproveitar tudo que o nosso clube tem a oferecer</Text>
-            </View>
             <View style={styles.titleBar}>
-                <Text style={styles.text}>Adicione seus convidados na lista</Text>
+                <View style={styles.titleBarStyles}>
+                    <Text style={styles.text}>Adicione seus Convidados na Lista</Text>
+                </View>
             </View>
             <View style={{ flex: 1 }}>
                 <View style={styles.container}>
@@ -249,7 +248,11 @@ function Guests({ navigation }) {
                                 //setModalVisible(true);
                             }}
                         >
-                            <Text style={styles.text}>Salvar</Text>
+                            <Text style={{
+                                fontSize: 18,
+                                textAlign: 'center',
+                                color: '#F2EFEA',
+                            }}>Salvar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -279,9 +282,10 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: 18,
+        fontSize: 19,
         textAlign: 'center',
-        color : '#F2EFEA'
+        color: '#F2EFEA',
+        fontWeight : 'bold'
     },
 
     buttonContainer: {
@@ -318,12 +322,23 @@ const styles = StyleSheet.create({
     },
 
     titleBar: {
+        backgroundColor: '#3B3F8C',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#D91122',
-        marginTop: 10,
+        position: 'relative',
         width: '100%',
-        height: 60
+        height: 107
+    },
+
+    titleBarStyles : {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '90%',
+        height: 60,
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#F2EFEA',
+        borderRadius : 10,
     },
     bottomButton: {
         position: 'absolute',
@@ -331,6 +346,7 @@ const styles = StyleSheet.create({
         width: '80%',
         height: 45,
         backgroundColor: '#3B3F8C',
+        borderRadius: 7,
     },
     scrollContainer: {
         position: 'absolute',
@@ -344,9 +360,9 @@ const styles = StyleSheet.create({
         height: 250,
         backgroundColor: '#F2EFEA',
         width: '100%',
-        borderStyle : 'solid',
-        borderWidth : 2,
-        borderColor : '#3B3F8C'
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#3B3F8C'
     },
 
     modalScrollContainer: {
@@ -399,7 +415,7 @@ const styles = StyleSheet.create({
         marginTop: 3,
         fontSize: 14,
         marginLeft: 10,
-        color : '#F2EFEA'
+        color: '#F2EFEA'
     }
 });
 

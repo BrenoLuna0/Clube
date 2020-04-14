@@ -17,7 +17,7 @@ const AppContainer = createAppContainer(
             screen: Login,
             navigationOptions: {
                 title: '',
-                headerShown: false
+                headerShown : false,
             }
         },
         Register: {

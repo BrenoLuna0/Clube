@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
-const { width, height } = Dimensions.get('window');
 
 function DatePicker({ navigation }) {
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
-    const [flag, setFlag] = useState(false);
 
     function onDateChange(date, type) {
         if (type === 'END_DATE') {
@@ -22,16 +20,17 @@ function DatePicker({ navigation }) {
     return (
         <>
             <View style={styles.header}>
-                <Text style={styles.text}>Convide seus amigos para aproveitar tudo que o nosso clube tem a oferecer</Text>
+                <View style={styles.titleBar}>
+                    <Text style={styles.text}>Selecione a Data</Text>
+                </View>
             </View>
-            <View style={styles.titleBar}>
-                <Text style={styles.text}>Selecione a Data</Text>
-            </View>
+
             <View style={{ flex: 1 }}>
                 <View style={styles.container}>
                     <CalendarPicker
                         onDateChange={onDateChange}
                         allowRangeSelection={true}
+                        selectedDayColor={'#03A64A'}
                         weekdays={['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']}
                         months={['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']}
                         previousTitle={'Anterior'}
@@ -108,9 +107,10 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: 18,
+        fontSize: 22,
         textAlign: 'center',
-        color : '#F2EFEA'
+        color: '#F2EFEA',
+        fontWeight: 'bold'
     },
 
     button: {
@@ -138,10 +138,12 @@ const styles = StyleSheet.create({
     titleBar: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#D91122',
-        marginTop: 20,
-        width: '100%',
-        height: 60
+        width: '70%',
+        height: 60,
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#F2EFEA',
+        borderRadius : 10,
     },
     container: {
         height: '80%',
