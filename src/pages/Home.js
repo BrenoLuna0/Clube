@@ -96,7 +96,7 @@ function Home({ navigation }) {
 
     async function getNome() {
         if (await isSignedIn()) {
-            setUsuario(await AsyncStorage.getItem('usuario'));
+            setUsuario(await AsyncStorage.getItem('SOCI_NOME'));
         } else {
             navigation.navigate('Login', {});
         }

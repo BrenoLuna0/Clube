@@ -4,6 +4,7 @@ const { width, height } = Dimensions.get('window');
 import { TextInputMask } from 'react-native-masked-text';
 
 function Guests({ navigation }) {
+    const [title, setTitle] = useState('Adicione seus Convidados na Lista');
     const [uniqueValue, setUniqueValue] = useState(1);
     const [guestList, setGuestList] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
@@ -46,7 +47,7 @@ function Guests({ navigation }) {
         <>
             <View style={styles.titleBar}>
                 <View style={styles.titleBarStyles}>
-                    <Text style={styles.text}>Adicione seus Convidados na Lista</Text>
+                    <Text style={styles.text}>{title}</Text>
                 </View>
             </View>
             <View style={{ flex: 1 }}>
@@ -57,6 +58,7 @@ function Guests({ navigation }) {
                         visible={modalVisible}
                         onRequestClose={() => {
                             setModalVisible(false);
+                            setTitle('Selecione os convidados da lista ou cadastre novos');
                         }}>
                         <View style={styles.modalContainer}>
                             <View style={styles.inputBlock}>
@@ -86,18 +88,8 @@ function Guests({ navigation }) {
                                         });
                                         setModalVisible(false);
                                     }}
-                                    title={'Adicionar Convidado'}
+                                    title={'Cadastrar Convidado(a)'}
                                     color={'#03A64A'}
-                                />
-                            </View>
-                            <View style={{ marginTop: 7 }}>
-                                <Button
-                                    onPress={() => {
-                                        setModalGuestsVisible(true);
-                                        setModalVisible(false);
-                                    }}
-                                    title={'Convidados Recentes'}
-                                    color={'#3B3F8C'}
                                 />
                             </View>
                         </View>
@@ -108,9 +100,26 @@ function Guests({ navigation }) {
                         visible={modalGuestsVisible}
                         onRequestClose={() => {
                             setModalGuestsVisible(false);
+                            setTitle('Adicione seus Convidados na Lista');
                         }}>
                         <View style={styles.modalScrollContainer}>
-                            <ScrollView style={{ backgroundColor: '#F2EFEA' }}>
+                            <View style={{ alignItems: 'center', marginTop: 2, marginBottom: 8 }}>
+                                <View style={styles.buttonContainerCadastrar}>
+                                    <TouchableOpacity
+                                        style={styles.buttonCadastrar}
+                                        onPress={() => {
+                                            setModalVisible(true);
+                                            setTitle('Cadastre um novo convidado');
+                                        }}
+                                    >
+                                        <Text style={{
+                                            color: '#FFF',
+                                            fontSize: 23
+                                        }}>Cadastrar Convidado</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <ScrollView>
                                 <View style={{ height: '100%' }}>
                                     <View style={styles.guestBlockScroll}>
                                         <TouchableOpacity
@@ -121,83 +130,6 @@ function Guests({ navigation }) {
                                                     cpf: '15321564515'
                                                 });
                                                 setModalGuestsVisible(false);
-                                            }}
-                                        >
-                                            <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
-                                            <Text style={styles.guestText}>CPF: 15321564515</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.guestBlockScroll}>
-                                        <TouchableOpacity
-                                            style={styles.buttonScroll}
-                                            onPress={() => {
-
-                                            }}
-                                        >
-                                            <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
-                                            <Text style={styles.guestText}>CPF: 15321564515</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.guestBlockScroll}>
-                                        <TouchableOpacity
-                                            style={styles.buttonScroll}
-                                            onPress={() => {
-
-                                            }}
-                                        >
-                                            <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
-                                            <Text style={styles.guestText}>CPF: 15321564515</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.guestBlockScroll}>
-                                        <TouchableOpacity
-                                            style={styles.buttonScroll}
-                                            onPress={() => {
-
-                                            }}
-                                        >
-                                            <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
-                                            <Text style={styles.guestText}>CPF: 15321564515</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.guestBlockScroll}>
-                                        <TouchableOpacity
-                                            style={styles.buttonScroll}
-                                            onPress={() => {
-
-                                            }}
-                                        >
-                                            <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
-                                            <Text style={styles.guestText}>CPF: 15321564515</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.guestBlockScroll}>
-                                        <TouchableOpacity
-                                            style={styles.buttonScroll}
-                                            onPress={() => {
-
-                                            }}
-                                        >
-                                            <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
-                                            <Text style={styles.guestText}>CPF: 15321564515</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.guestBlockScroll}>
-                                        <TouchableOpacity
-                                            style={styles.buttonScroll}
-                                            onPress={() => {
-
-                                            }}
-                                        >
-                                            <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
-                                            <Text style={styles.guestText}>CPF: 15321564515</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={styles.guestBlockScroll}>
-                                        <TouchableOpacity
-                                            style={styles.buttonScroll}
-                                            onPress={() => {
-
                                             }}
                                         >
                                             <Text style={styles.guestText}>Nome: Niverton Magalhães Menezes</Text>
@@ -230,17 +162,18 @@ function Guests({ navigation }) {
                                 </View>
                             )
                         })}
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={() => {
-                                    setModalVisible(true);
-                                }}
-                            >
-                                <Text style={styles.text}>+</Text>
-                            </TouchableOpacity>
-                        </View>
                     </ScrollView>
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => {
+                                setModalGuestsVisible(true);
+                                setTitle('Selecione os convidados da lista ou cadastre novos');
+                            }}
+                        >
+                            <Text style={styles.text}>+</Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={styles.bottomButton}>
                         <TouchableOpacity
                             style={styles.button}
@@ -285,16 +218,17 @@ const styles = StyleSheet.create({
         fontSize: 19,
         textAlign: 'center',
         color: '#F2EFEA',
-        fontWeight : 'bold'
+        fontWeight: 'bold'
     },
 
     buttonContainer: {
         backgroundColor: '#03A64A',
         marginTop: 5,
-        width: 50,
-        borderRadius: 7,
-        height: 50,
-        marginLeft: '85%'
+        width: 65,
+        borderRadius: 50,
+        height: 65,
+        left: '37%',
+        top: '55%'
     },
 
     guestRemove: {
@@ -321,16 +255,23 @@ const styles = StyleSheet.create({
         //alignItems: 'center',
     },
 
+    buttonCadastrar: {
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+    },
+
     titleBar: {
         backgroundColor: '#3B3F8C',
-        justifyContent: 'center',
+        //justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
         width: '100%',
-        height: 107
+        height: 80
     },
 
-    titleBarStyles : {
+    titleBarStyles: {
         justifyContent: 'center',
         alignItems: 'center',
         width: '90%',
@@ -338,7 +279,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 2,
         borderColor: '#F2EFEA',
-        borderRadius : 10,
+        borderRadius: 10,
     },
     bottomButton: {
         position: 'absolute',
@@ -356,9 +297,9 @@ const styles = StyleSheet.create({
     },
 
     modalContainer: {
-        marginTop: '43%',
-        height: 250,
-        backgroundColor: '#F2EFEA',
+        marginTop: '38%',
+        flex: 1,
+        backgroundColor: '#FFF',
         width: '100%',
         borderStyle: 'solid',
         borderWidth: 2,
@@ -366,10 +307,10 @@ const styles = StyleSheet.create({
     },
 
     modalScrollContainer: {
+        marginTop: '38%',
         flex: 1,
-        marginTop: '43%',
-        height: 250,
-        width: '100%'
+        width: '100%',
+        backgroundColor: '#FFF',
     },
 
     inputBlock: {
@@ -416,7 +357,16 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginLeft: 10,
         color: '#F2EFEA'
-    }
+    },
+
+    buttonContainerCadastrar: {
+        width: '80%',
+        height: 50,
+        backgroundColor: '#03A64A',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 });
 
 

@@ -44,7 +44,7 @@ function DatePicker({ navigation }) {
                         <TouchableOpacity
                             style={styles.buttonBox}
                             onPress={() => {
-                                navigation.navigate('Guests', {});
+                                navigation.navigate('Guests2', {});
                             }}
                         >
                             <Text style={styles.buttonText}> Próximo </Text>
@@ -62,11 +62,11 @@ function DatePicker({ navigation }) {
 const styles = StyleSheet.create({
     header: {
         backgroundColor: '#3B3F8C',
-        justifyContent: 'center',
+        //justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
         width: '100%',
-        height: 107
+        height: 80
     },
 
     containerChild: {

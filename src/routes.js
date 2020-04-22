@@ -1,13 +1,13 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import {navigationRef} from './services/navigation'
+import { navigationRef } from './services/navigation'
 
 import Login from '../src/pages/Login';
 import Register from '../src/pages/Register';
 import Home from '../src/pages/Home';
 import DatePicker from '../src/pages/DatePicker';
-import Guests from '../src/pages/Guests';
+import Guests2 from '../src/pages/Guests2';
 import Activities from '../src/pages/Activities';
 import Schedulles from '../src/pages/Schedulles';
 
@@ -17,7 +17,7 @@ const AppContainer = createAppContainer(
             screen: Login,
             navigationOptions: {
                 title: '',
-                headerShown : false,
+                headerShown: false,
             }
         },
         Register: {
@@ -38,14 +38,30 @@ const AppContainer = createAppContainer(
             screen: DatePicker,
             navigationOptions: {
                 title: '',
-                headerShown: false
+                headerBackTitleVisible : true,
+                headerBackTitle: 'Voltar',
+                headerTintColor : '#F2EFEA',
+                headerStyle: {
+                    backgroundColor: '#3B3F8C',
+                    elevation: 0,
+                    shadowOpacity: 0,
+                    borderBottomWidth: 0,
+                }
             }
         },
-        Guests: {
-            screen: Guests,
+        Guests2: {
+            screen: Guests2,
             navigationOptions: {
                 title: '',
-                headerShown: false
+                headerBackTitleVisible : true,
+                headerBackTitle: 'Voltar',
+                headerTintColor : '#F2EFEA',
+                headerStyle: {
+                    backgroundColor: '#3B3F8C',
+                    elevation: 0,
+                    shadowOpacity: 0,
+                    borderBottomWidth: 0,
+                }
             }
         },
         Activities: {
@@ -60,13 +76,13 @@ const AppContainer = createAppContainer(
             navigationOptions: {
                 title: '',
                 headerShown: false,
-                
+
             }
         },
     })
 );
 
-const Routes = ()=> {return <AppContainer ref={navigationRef}/>}
+const Routes = () => { return <AppContainer ref={navigationRef} /> }
 
 export default Routes;
 
@@ -123,7 +139,7 @@ export const SignedInRoutes = createStackNavigator({
         navigationOptions: {
             title: '',
             headerShown: false,
-            
+
         }
     },
 

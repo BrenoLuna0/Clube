@@ -10,6 +10,7 @@ const IMAGE_HEIGHT = window.width / 2;
 function Login({ navigation }) {
     const [numTitulo, setNumTitulo] = useState('');
     const [senha, setSenha] = useState('');
+    const [mask, setMask] = useState('999999999');
 
     return (
 
@@ -30,16 +31,19 @@ function Login({ navigation }) {
             <View style={{ marginTop: 100 }}></View>
             <View style={styles.inputBlock}>
                 <Text style={styles.text}>
-                    Número do Titular
+                    Número do Titular ou CPF
                     </Text>
                 <TextInputMask
                     keyboardType={'number-pad'}
                     type={'custom'}
                     options={{
-                        mask: '999999999'
+                        mask
                     }}
                     value={numTitulo}
                     onChangeText={text => {
+                        if(text.length >= 4){
+                            setMask('999.999.999-99');
+                        }
                         setNumTitulo(text)
                     }}
                     style={styles.input}
