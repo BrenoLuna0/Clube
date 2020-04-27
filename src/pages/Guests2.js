@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, Dimensions, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage } from 'react-native'
-const { width, height } = Dimensions.get('window');
+import { View, TextInput, Text, Dimensions, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage , ActivityIndicator} from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import { Table, Row } from 'react-native-table-component';
 import { CheckBox } from 'react-native-elements'
 import api from '../services/api';
+import styles from '../styles/Guests.style';
 
 function Guests({ navigation }) {
     const [title, setTitle] = useState('Adicione seus Convidados na Lista');
     const [tableData, setTableData] = useState([]);
-    const [tableState, setTableState] = useState(false);
+    const [tableState, setTableState] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisibility, setModalVisibility] = useState(true);
+    const [name, setName] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [tipo, setTipo] = useState('I');
 
     useEffect(() => {
         async function carregarConvidados() {
@@ -17,6 +22,8 @@ function Guests({ navigation }) {
             api.get(`/convidado/${sociCodigo}`)
                 .then(function (response) {
                     setTableData(response.data);
+                    setTableState(state=>[...state, false]);
+                    setModalVisibility(false)
 
                 })
                 .catch(function (err) {
@@ -25,8 +32,43 @@ function Guests({ navigation }) {
         }
 
         carregarConvidados();
-        console.log(tableState);
     }, []);
+
+    const addGuest = async () => {
+        if (name === '') {
+            alert('Campo de nome é obrigatório');
+        } else {
+            api.post('/convidado', {
+                codigo: 3,
+                nome: name,
+                socio: await AsyncStorage.getItem('SOCI_CODIGO'),
+                tipo,
+                cpf
+            }).then(function (response) {
+                if (!response.data) {
+                    alert('Não foi possível adicionar o convidado no momento. Tente novamente mais tarde');
+                } else {
+                    carregarConvidados();
+                    setModalVisible(!modalVisible);
+                }
+            }).catch(function (err) {
+                console.log(err);
+                alert('Não foi possível adicionar o convidado no momento. Tente novamente mais tarde');
+            });
+        }
+    }
+
+    const carregarConvidados = async () => {
+        const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
+        api.get(`/convidado/${sociCodigo}`)
+            .then(function (response) {
+                setTableData(response.data);
+
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    }
 
     const userBox = (convidado) => (
         <View style={{ height: 70, width: '100%' }}>
@@ -44,9 +86,11 @@ function Guests({ navigation }) {
             <CheckBox
                 center
                 checkedColor='#03A64A'
-                checked={tableState}
+                checked={tableState[index]}
                 onPress={() => {
-                    setTableState(!tableState);
+                    let arr = tableState;
+                    arr[index] = true;
+                    setTableState(arr);
                 }}
             />
         </View>
@@ -60,11 +104,71 @@ function Guests({ navigation }) {
                 </View>
             </View>
             <View style={{ flex: 1, alignItems: 'center', position: 'relative' }}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(false);
+                        setTitle('Selecione os convidados da lista ou cadastre novos');
+                    }}>
+                    <View style={styles.modalContainer}>
+                        <View style={styles.inputBlock}>
+                            <Text style={styles.textInput}>Nome do(a) Convidado(a):</Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={(name) => setName(name)}
+                            />
+                        </View>
+                        <View style={styles.inputBlock}>
+                            <Text style={styles.textInput}>CPF:</Text>
+                            <TextInputMask
+                                type={'cpf'}
+                                value={cpf}
+                                onChangeText={text => {
+                                    setCpf(text);
+                                    if (text === '') {
+                                        setTipo('I');
+                                    } else {
+                                        setTipo('A');
+                                    }
+                                }}
+                                style={styles.input}
+                            />
+                        </View>
+                        <View style={{}}>
+                            <Button
+                                onPress={() => {
+                                    addGuest();
+                                    setCpf('');
+                                }}
+                                title={'Cadastrar Convidado(a)'}
+                                color={'#03A64A'}
+                            />
+                        </View>
+                        <View style={{ marginTop: 15, alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                            <Text style={{
+                                color: '#D91122',
+                                fontSize: 13,
+                                fontWeight: 'bold'
+                            }}
+                            >Caso o(a) convidado(a) tenha menos de 12 anos, deixar campo CPF em branco</Text>
+                        </View>
+                    </View>
+                </Modal>
+                <Modal
+                    visible={modalVisibility}
+                    transparent={true}
+                    >
+                    <View style={styles.modalContainerLoading}>
+                        <ActivityIndicator size="large" color="#0000ff" />
+                    </View>
+                </Modal>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-
+                            setModalVisible(!modalVisible);
                         }}
                     >
                         <Text style={styles.text}>+</Text>
@@ -89,7 +193,7 @@ function Guests({ navigation }) {
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            //setModalVisible(true);
+                            setModalVisible(true);
                         }}
                     >
                         <Text style={{
@@ -105,182 +209,6 @@ function Guests({ navigation }) {
     )
 }
 
-const styles = StyleSheet.create({
-    header: {
-        backgroundColor: '#3B3F8C',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'relative',
-        width: '100%',
-        height: 107
-    },
-
-
-    container: {
-        position: 'absolute',
-        top: 0,
-        height: '80%',
-        width: '95%',
-        marginTop: 5,
-    },
-
-    text: {
-        fontSize: 19,
-        textAlign: 'center',
-        color: '#F2EFEA',
-        fontWeight: 'bold'
-    },
-
-    buttonContainer: {
-        backgroundColor: '#03A64A',
-        marginTop: 5,
-        width: 65,
-        borderRadius: 50,
-        height: 65,
-        position: 'absolute',
-        bottom: '20%',
-        right: '5%',
-        zIndex: 100
-
-    },
-
-    guestRemove: {
-        backgroundColor: '#D91122',
-        marginTop: 9,
-        width: 50,
-        borderRadius: 7,
-        height: 50,
-        marginLeft: '5%',
-
-    },
-
-    button: {
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-    },
-
-    buttonScroll: {
-        //justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        //alignItems: 'center',
-    },
-
-    buttonCadastrar: {
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-    },
-
-    titleBar: {
-        backgroundColor: '#3B3F8C',
-        //justifyContent: 'center',
-        alignItems: 'center',
-        position: 'relative',
-        width: '100%',
-        height: 80
-    },
-
-    titleBarStyles: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '90%',
-        height: 60,
-        borderStyle: 'solid',
-        borderWidth: 2,
-        borderColor: '#F2EFEA',
-        borderRadius: 10,
-    },
-    bottomButton: {
-        position: 'absolute',
-        bottom: 20,
-        width: '80%',
-        height: 45,
-        backgroundColor: '#3B3F8C',
-        borderRadius: 7,
-    },
-    scrollContainer: {
-        position: 'absolute',
-        top: 0,
-        width: '100%',
-        height: '77%',
-    },
-
-    modalContainer: {
-        marginTop: '38%',
-        flex: 1,
-        backgroundColor: '#FFF',
-        width: '100%',
-        borderStyle: 'solid',
-        borderWidth: 2,
-        borderColor: '#3B3F8C'
-    },
-
-    modalScrollContainer: {
-        marginTop: '38%',
-        flex: 1,
-        width: '100%',
-        backgroundColor: '#FFF',
-    },
-
-    inputBlock: {
-        width: '80%',
-    },
-
-    textInput: {
-        marginLeft: 10,
-        fontSize: 18,
-    },
-
-    input: {
-        marginTop: 10,
-        fontSize: 18,
-        borderColor: 'black',
-        borderStyle: 'solid',
-        borderBottomWidth: 1,
-        width: '100%',
-        marginBottom: 15,
-        marginLeft: 10,
-    },
-
-    guestBlock: {
-        height: 50,
-        width: '80%',
-        backgroundColor: '#3B3F8C',
-        marginTop: 9,
-    },
-
-    guestBlockScroll: {
-        height: 55,
-        width: '100%',
-        backgroundColor: '#3B3F8C',
-        marginTop: 9,
-        borderRadius: 7,
-    },
-
-    guestContainer: {
-        flexDirection: "row"
-    },
-
-    guestText: {
-        marginTop: 3,
-        fontSize: 14,
-        marginLeft: 10,
-        color: '#F2EFEA'
-    },
-
-    buttonContainerCadastrar: {
-        width: '80%',
-        height: 50,
-        backgroundColor: '#03A64A',
-        borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-});
 
 
 export default Guests;

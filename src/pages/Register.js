@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Linking, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, Text, Button, ScrollView} from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
-
-const IMAGE_HEIGHT = window.width / 2;
-const IMAGE_HEIGHT_SMALL = window.width / 7;
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import styles from '../styles/Register.style';
 
 function Register() {
     const [numTitulo, setNumTitulo] = useState('');
@@ -119,73 +116,6 @@ function Register() {
         </ScrollView>
     )
 }
-
-const styles = StyleSheet.create({
-    containerMaster: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    header: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        width: '100%',
-        height: 200
-    },
-
-    containerChild: {
-        position: 'absolute',
-        backgroundColor: '#AEAEAE',
-        justifyContent: 'center',
-        borderRadius: 85,
-        width: 170,
-        height: 170,
-        bottom: 0
-    },
-
-    registration: {
-        alignItems: 'center',
-        position: 'relative',
-        height: '80%',
-        width: '100%',
-        marginTop: 20
-    },
-
-    input: {
-        height: 34,
-        marginBottom: 10,
-        fontSize: 18,
-        borderStyle: 'solid',
-        borderColor: '#8c8c8c',
-        borderWidth: 1,
-        borderRadius: 7
-    },
-
-    inputBlock: {
-        width: '80%',
-    },
-
-    text: {
-        fontSize: 18
-    },
-
-    button: {
-        marginTop: 5,
-        width: '60%',
-    },
-
-    link: {
-        color: '#8c8c8c',
-        marginTop: 5
-    },
-
-    register: {
-        position: 'absolute',
-        bottom: '25%',
-        width: '60%',
-    }
-});
 
 
 

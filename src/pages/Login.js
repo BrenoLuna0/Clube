@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Image, StatusBar} from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Image, StatusBar, Modal, ActivityIndicator } from 'react-native';
 import { onSignIn } from '../services/auth';
 import { TextInputMask } from 'react-native-masked-text';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
-const IMAGE_HEIGHT = window.width / 2;
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import styles from '../styles/Login.style';
 
 
 function Login({ navigation }) {
     const [numTitulo, setNumTitulo] = useState('');
     const [senha, setSenha] = useState('');
     const [mask, setMask] = useState('999999999');
+    const [modalVisibility, setModalVisibility] = useState(false);
 
     return (
 
@@ -19,7 +19,17 @@ function Login({ navigation }) {
             contentContainerStyle={styles.containerMaster}
             scrollEnabled={false}
         >
-            <StatusBar backgroundColor='#3B3F8C' barStyle='light-content'/>
+            <StatusBar backgroundColor='#3B3F8C' barStyle='light-content' />
+            <Modal
+                visible={modalVisibility}
+                transparent={true}
+                onRequestClose={()=>{
+                    setModalVisibility(false);
+                }}>
+                <View style={styles.modalContainer}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+            </Modal>
             <View style={styles.header}>
                 <View style={styles.containerChild}>
                     <Image
@@ -41,7 +51,7 @@ function Login({ navigation }) {
                     }}
                     value={numTitulo}
                     onChangeText={text => {
-                        if(text.length >= 4){
+                        if (text.length >= 4) {
                             setMask('999.999.999-99');
                         }
                         setNumTitulo(text)
@@ -62,12 +72,15 @@ function Login({ navigation }) {
             <View style={styles.button}>
                 <Button
                     onPress={async () => {
+                        setModalVisibility(true);
                         const result = await onSignIn(numTitulo, senha);
                         if (result) {
                             setNumTitulo('');
                             setSenha('');
                             navigation.navigate('Home', {});
+                            setModalVisibility(false);
                         } else {
+                            setModalVisibility(false);
                             alert('Numero de titular ou senha inválida');
                         }
                     }}
@@ -93,88 +106,6 @@ function Login({ navigation }) {
     )
 }
 
-const styles = StyleSheet.create({
-    containerMaster: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    logo: {
-        height: IMAGE_HEIGHT,
-        resizeMode: 'contain',
-        marginBottom: 20,
-        padding: 10,
-        marginTop: 20
-    },
-    register: {
-        marginBottom: 20,
-        width: window.width - 100,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 50,
-        backgroundColor: '#ffae',
-    },
-    header: {
-        backgroundColor: '#3B3F8C',
-        alignItems: 'center',
-        position: 'relative',
-        width: '100%',
-        height: 200
-    },
-
-    containerChild: {
-        position: 'absolute',
-        backgroundColor: '#F2EFEA',
-        justifyContent: 'center',
-        borderRadius: 85,
-        width: 170,
-        height: 170,
-        bottom: -85
-    },
-
-    containerChildImage: {
-        position: 'absolute',
-        backgroundColor: '#F2EFEA',
-        justifyContent: 'center',
-        borderRadius: 85,
-        width: 170,
-        height: 170,
-    },
-
-    input: {
-        height: 34,
-        marginBottom: 10,
-        fontSize: 18,
-        borderStyle: 'solid',
-        borderColor: '#8c8c8c',
-        borderWidth: 1,
-        borderRadius: 7,
-    },
-
-    inputBlock: {
-        width: '80%',
-    },
-
-    text: {
-        fontSize: 18
-    },
-
-    button: {
-        marginTop: 1,
-        width: '60%',
-        borderRadius: 7
-    },
-
-    link: {
-        color: '#8c8c8c',
-        marginTop: 5
-    },
-
-    register: {
-        width: '60%',
-        marginTop: '10%'
-    }
-});
 
 
 
