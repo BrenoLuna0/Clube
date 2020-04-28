@@ -116,7 +116,7 @@ function Home({ navigation }) {
         <>
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.container}>
-                    {gradient}
+                    
                     <ScrollView
                         style={styles.scrollview}
                         scrollEventThrottle={200}

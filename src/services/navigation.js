@@ -7,7 +7,6 @@ export function getCurrentRoute(nav) {
         nav = navigationRef.current?.state.nav
     }
     
-    console.log(nav);
     if (Array.isArray(nav.routes) && nav.routes.length > 0) {
         return getCurrentRoute(nav.routes[nav.index])
     } else {

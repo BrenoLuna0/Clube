@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Text, Dimensions, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage , ActivityIndicator} from 'react-native'
+import { View, TextInput, Text, Dimensions, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage, ActivityIndicator } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import { Table, Row } from 'react-native-table-component';
 import { CheckBox } from 'react-native-elements'
@@ -22,8 +22,10 @@ function Guests({ navigation }) {
             api.get(`/convidado/${sociCodigo}`)
                 .then(function (response) {
                     setTableData(response.data);
-                    setTableState(state=>[...state, false]);
+                    setTableState(response.data.map(()=>false));
                     setModalVisibility(false)
+
+                    console.log(tableState);
 
                 })
                 .catch(function (err) {
@@ -81,20 +83,29 @@ function Guests({ navigation }) {
         </View>
     )
 
-    const chechBox = (index) => (
-        <View>
-            <CheckBox
-                center
-                checkedColor='#03A64A'
-                checked={tableState[index]}
-                onPress={() => {
-                    let arr = tableState;
-                    arr[index] = true;
-                    setTableState(arr);
-                }}
-            />
-        </View>
-    )
+    const chechBox = (index) => {
+        return (
+            <View>
+                <CheckBox
+                    key={index}
+                    center
+                    checkedColor='#03A64A'
+                    checked={tableState[index]}
+                    onPress={()=>handleCheckboxClick(index)}
+                />
+            </View>
+        )
+    }
+
+    const handleCheckboxClick = (checkBox) => {
+        setTableState(state=>state.map((item,index)=>{
+            if(checkBox == index){
+                return !item;
+            }else{
+                return item;
+            }
+        }));
+    }
 
     return (
         <>
@@ -159,7 +170,7 @@ function Guests({ navigation }) {
                 <Modal
                     visible={modalVisibility}
                     transparent={true}
-                    >
+                >
                     <View style={styles.modalContainerLoading}>
                         <ActivityIndicator size="large" color="#0000ff" />
                     </View>
