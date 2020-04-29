@@ -15,8 +15,11 @@ function Guests({ navigation }) {
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
     const [tipo, setTipo] = useState('I');
+    const [limit, setLimit] = useState(navigation.state.params.limite);
+    const [selectedBoxes, setSelectedBoxes] = useState(0);
 
     useEffect(() => {
+
         async function carregarConvidados() {
             const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
             api.get(`/convidado/${sociCodigo}`)
@@ -25,14 +28,11 @@ function Guests({ navigation }) {
                     setTableState(response.data.map(()=>false));
                     setModalVisibility(false)
 
-                    console.log(tableState);
-
                 })
                 .catch(function (err) {
                     console.log(err);
                 })
         }
-
         carregarConvidados();
     }, []);
 
@@ -100,7 +100,18 @@ function Guests({ navigation }) {
     const handleCheckboxClick = (checkBox) => {
         setTableState(state=>state.map((item,index)=>{
             if(checkBox == index){
-                return !item;
+                if(item == false){
+                    if(selectedBoxes < limit){
+                        setSelectedBoxes(selectedBoxes + 1);
+                        return !item;
+                    }else{
+                        alert('Número máximo de convidados atingidos');
+                        return item;
+                    }
+                }else{
+                    setSelectedBoxes(selectedBoxes - 1);
+                    return !item;
+                }
             }else{
                 return item;
             }

@@ -14,6 +14,7 @@ function DatePicker({ navigation }) {
             setSelectedStartDate(date);
             setSelectedEndDate(null);
         }
+
     }
     const startDate = selectedStartDate ? selectedStartDate.toString() : '';
     const endDate = selectedEndDate ? selectedEndDate.toString() : '';
@@ -30,7 +31,7 @@ function DatePicker({ navigation }) {
                 <View style={styles.container}>
                     <CalendarPicker
                         onDateChange={onDateChange}
-                        allowRangeSelection={true}
+                        allowRangeSelection={false}
                         selectedDayColor={'#03A64A'}
                         weekdays={['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab']}
                         months={['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']}
@@ -40,12 +41,19 @@ function DatePicker({ navigation }) {
                     />
 
                 </View>
+
                 <View style={styles.login}>
                     <View style={styles.button}>
                         <TouchableOpacity
                             style={styles.buttonBox}
                             onPress={() => {
-                                navigation.navigate('Guests2', {});
+                                const data = new Date(selectedStartDate);
+                                if(data.getDay() == 0 || data.getDay() == 6){
+                                    navigation.navigate('Guests2', { limite :  1 });
+                                }else{
+                                    navigation.navigate('Guests2', { limite :  2 });
+                                }
+                                
                             }}
                         >
                             <Text style={styles.buttonText}> Próximo </Text>
