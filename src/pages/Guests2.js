@@ -25,7 +25,7 @@ function Guests({ navigation }) {
             api.get(`/convidado/${sociCodigo}`)
                 .then(function (response) {
                     setTableData(response.data);
-                    setTableState(response.data.map(()=>false));
+                    setTableState(response.data.map(() => false));
                     setModalVisibility(false)
 
                 })
@@ -40,9 +40,12 @@ function Guests({ navigation }) {
         if (name === '') {
             alert('Campo de nome é obrigatório');
         } else {
+            const codigo = await api.post('/gerarIdConvidado',{}).then(function(response){
+                return response.data;
+            });
             api.post('/convidado', {
-                codigo: 3,
-                nome: name,
+                codigo: codigo[0],
+                nome: name.toUpperCase(),
                 socio: await AsyncStorage.getItem('SOCI_CODIGO'),
                 tipo,
                 cpf
@@ -61,11 +64,13 @@ function Guests({ navigation }) {
     }
 
     const carregarConvidados = async () => {
+        setSelectedBoxes(0);
         const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
         api.get(`/convidado/${sociCodigo}`)
             .then(function (response) {
                 setTableData(response.data);
-
+                setTableState(response.data.map(() => false));
+                setModalVisibility(false);
             })
             .catch(function (err) {
                 console.log(err);
@@ -91,28 +96,28 @@ function Guests({ navigation }) {
                     center
                     checkedColor='#03A64A'
                     checked={tableState[index]}
-                    onPress={()=>handleCheckboxClick(index)}
+                    onPress={() => handleCheckboxClick(index)}
                 />
             </View>
         )
     }
 
     const handleCheckboxClick = (checkBox) => {
-        setTableState(state=>state.map((item,index)=>{
-            if(checkBox == index){
-                if(item == false){
-                    if(selectedBoxes < limit){
+        setTableState(state => state.map((item, index) => {
+            if (checkBox == index) {
+                if (item == false) {
+                    if (selectedBoxes < limit) {
                         setSelectedBoxes(selectedBoxes + 1);
                         return !item;
-                    }else{
+                    } else {
                         alert('Número máximo de convidados atingidos');
                         return item;
                     }
-                }else{
+                } else {
                     setSelectedBoxes(selectedBoxes - 1);
                     return !item;
                 }
-            }else{
+            } else {
                 return item;
             }
         }));
@@ -168,6 +173,15 @@ function Guests({ navigation }) {
                                 color={'#03A64A'}
                             />
                         </View>
+                        <View style={{}}>
+                            <Button
+                                onPress={() => {
+                                    setModalVisible(false);
+                                }}
+                                title={'Fechar'}
+                                color={'#D91122'}
+                            />
+                        </View>
                         <View style={{ marginTop: 15, alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                             <Text style={{
                                 color: '#D91122',
@@ -215,7 +229,7 @@ function Guests({ navigation }) {
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            setModalVisible(true);
+                            //setModalVisible(true);
                         }}
                     >
                         <Text style={{
