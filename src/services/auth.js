@@ -9,7 +9,6 @@ export const onSignIn = async (codigo, senha) => {
         senha
     }).then(async function (response) {
         if (response.data) {
-            console.log(response.data);
             await AsyncStorage.setItem('TITU_CODIGO', response.data[0].TITU_CODIGO.toString());
             await AsyncStorage.setItem('TITU_NUME_TITULO', response.data[0].TITU_NUME_TITULO.toString());
             await AsyncStorage.setItem('SOCI_CODIGO', response.data[0].SOCI_CODIGO.toString());

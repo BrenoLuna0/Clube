@@ -15,20 +15,13 @@ export default StyleSheet.create({
         padding: 10,
         marginTop: 20
     },
-    register: {
-        marginBottom: 20,
-        width: window.width - 100,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 50,
-        backgroundColor: '#ffae',
-    },
     header: {
         backgroundColor: '#3B3F8C',
         alignItems: 'center',
         position: 'relative',
         width: '100%',
-        height: 200
+        height: '38%',
+        marginTop : '-5%',
     },
 
     containerChild: {

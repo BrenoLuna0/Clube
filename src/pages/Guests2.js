@@ -3,6 +3,7 @@ import { View, TextInput, Text, Dimensions, ScrollView, TouchableOpacity, Modal,
 import { TextInputMask } from 'react-native-masked-text';
 import { Table, Row } from 'react-native-table-component';
 import { CheckBox } from 'react-native-elements'
+import moment from 'moment';
 import api from '../services/api';
 import styles from '../styles/Guests.style';
 
@@ -12,14 +13,17 @@ function Guests({ navigation }) {
     const [tableState, setTableState] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisibility, setModalVisibility] = useState(true);
+    const [modalSaveVisibility, setModalSaveVisibility] = useState(false);
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
     const [tipo, setTipo] = useState('I');
+    const [data, setData] = useState(new Date(navigation.state.params.data.toString()));
     const [limit, setLimit] = useState(navigation.state.params.limite);
     const [selectedBoxes, setSelectedBoxes] = useState(0);
 
-    useEffect(() => {
+    const dias = ['DOMINGO', 'SEGUNDA-FEIRA', 'TERÇA-FEIRA', 'QUARTA-FEIRA', 'QUINTA-FEIRA', 'SEXTA-FEIRA', 'SABADO'];
 
+    useEffect(() => {
         async function carregarConvidados() {
             const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
             api.get(`/convidado/${sociCodigo}`)
@@ -40,7 +44,7 @@ function Guests({ navigation }) {
         if (name === '') {
             alert('Campo de nome é obrigatório');
         } else {
-            const codigo = await api.post('/gerarIdConvidado',{}).then(function(response){
+            const codigo = await api.post('/gerarIdConvidado', {}).then(function (response) {
                 return response.data;
             });
             api.post('/convidado', {
@@ -123,6 +127,59 @@ function Guests({ navigation }) {
         }));
     }
 
+    const inserirAgenda = async () => {
+        if (selectedBoxes == 0 || selectedBoxes == null) {
+            alert('Selecione as pessoas que deseja convidar para o Clube');
+        } else {
+            setModalSaveVisibility(!modalSaveVisibility);
+            api.post('/agenda', {
+                codigo: 7,
+                data: moment(data).format('DD/MM/YYYY'),
+                diaSemana: dias[data.getDay()],
+                qtdConvidado: selectedBoxes,
+                dataIncl: moment().format('DD/MM/YYYY')
+            }).then((response) => {
+                if (response.data) {
+                    inserirConvidadosAgenda(7);
+                    //alert('Data agendada');
+                    //setModalSaveVisibility(false);
+                }
+            }).catch((err) => {
+                console.log(err);
+                alert('Houve um erro ao convidar os seus amigos, tente novamente mais tarde');
+                setModalSaveVisibility(false);
+            });
+        }
+
+    }
+
+    const inserirConvidadosAgenda = async (agenCodigo) => {
+        const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
+        const convidados = tableData.map((convidado, index) => {
+            if (tableState[index]) {
+                return convidado;
+            }
+        })
+        api.post('/agendaConvidado', {
+            agenCodigo,
+            convidados,
+            socio: sociCodigo,
+            observacao: "",
+            dataIncl: moment().format('DD/MM/YYYY')
+        })
+            .then((response) => {
+                if (response.data) {
+                    alert('Data agendada');
+                    setModalSaveVisibility(false);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                alert('Houve um erro ao convidar os seus amigos, tente novamente mais tarde');
+                setModalSaveVisibility(false);
+            });
+    }
+
     return (
         <>
             <View style={styles.titleBar}>
@@ -163,6 +220,14 @@ function Guests({ navigation }) {
                                 style={styles.input}
                             />
                         </View>
+                        <View style={{ marginBottom: 15, alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                            <Text style={{
+                                color: '#D91122',
+                                fontSize: 13,
+                                fontWeight: 'bold'
+                            }}
+                            >Caso o(a) convidado(a) tenha menos de 12 anos, deixar campo CPF em branco</Text>
+                        </View>
                         <View style={{}}>
                             <Button
                                 onPress={() => {
@@ -173,7 +238,7 @@ function Guests({ navigation }) {
                                 color={'#03A64A'}
                             />
                         </View>
-                        <View style={{}}>
+                        <View style={{ marginTop: 20 }}>
                             <Button
                                 onPress={() => {
                                     setModalVisible(false);
@@ -182,14 +247,7 @@ function Guests({ navigation }) {
                                 color={'#D91122'}
                             />
                         </View>
-                        <View style={{ marginTop: 15, alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-                            <Text style={{
-                                color: '#D91122',
-                                fontSize: 13,
-                                fontWeight: 'bold'
-                            }}
-                            >Caso o(a) convidado(a) tenha menos de 12 anos, deixar campo CPF em branco</Text>
-                        </View>
+
                     </View>
                 </Modal>
                 <Modal
@@ -197,6 +255,14 @@ function Guests({ navigation }) {
                     transparent={true}
                 >
                     <View style={styles.modalContainerLoading}>
+                        <ActivityIndicator size="large" color="#0000ff" />
+                    </View>
+                </Modal>
+                <Modal
+                    visible={modalSaveVisibility}
+                    transparent={true}
+                >
+                    <View style={styles.modalContainerSaveLoading}>
                         <ActivityIndicator size="large" color="#0000ff" />
                     </View>
                 </Modal>
@@ -229,7 +295,7 @@ function Guests({ navigation }) {
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            //setModalVisible(true);
+                            inserirAgenda();
                         }}
                     >
                         <Text style={{

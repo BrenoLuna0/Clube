@@ -49,9 +49,9 @@ function DatePicker({ navigation }) {
                             onPress={() => {
                                 const data = new Date(selectedStartDate);
                                 if(data.getDay() == 0 || data.getDay() == 6){
-                                    navigation.navigate('Guests2', { limite :  1 });
+                                    navigation.navigate('Guests2', { limite :  1 , data : selectedStartDate});
                                 }else{
-                                    navigation.navigate('Guests2', { limite :  2 });
+                                    navigation.navigate('Guests2', { limite :  2 , data : selectedStartDate});
                                 }
                                 
                             }}

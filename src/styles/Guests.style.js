@@ -123,6 +123,14 @@ export default StyleSheet.create({
         opacity: 0.4
     },
 
+    modalContainerSaveLoading: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        opacity: 0.6
+    },
+
     modalScrollContainer: {
         marginTop: '38%',
         flex: 1,
