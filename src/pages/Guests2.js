@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Text, Dimensions, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage, ActivityIndicator } from 'react-native'
+import { View, TextInput, Text, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage, ActivityIndicator } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import { Table, Row } from 'react-native-table-component';
 import { CheckBox } from 'react-native-elements'
@@ -26,7 +26,10 @@ function Guests({ navigation }) {
     useEffect(() => {
         async function carregarConvidados() {
             const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
-            api.get(`/convidado/${sociCodigo}`)
+            const token = await AsyncStorage.getItem('token');
+            api.get(`/convidado/${sociCodigo}`, {
+                headers: { 'x-access-token': token }
+            })
                 .then(function (response) {
                     setTableData(response.data);
                     setTableState(response.data.map(() => false));
@@ -44,7 +47,10 @@ function Guests({ navigation }) {
         if (name === '') {
             alert('Campo de nome é obrigatório');
         } else {
-            const codigo = await api.post('/gerarIdConvidado', {}).then(function (response) {
+            const token = await AsyncStorage.getItem('token');
+            const codigo = await api.post('/gerarIdConvidado', {}, {
+                headers: { 'x-access-token': token }
+            }).then(function (response) {
                 return response.data;
             });
             api.post('/convidado', {
@@ -53,6 +59,8 @@ function Guests({ navigation }) {
                 socio: await AsyncStorage.getItem('SOCI_CODIGO'),
                 tipo,
                 cpf
+            },{
+                headers : {'x-access-token' : token}
             }).then(function (response) {
                 if (!response.data) {
                     alert('Não foi possível adicionar o convidado no momento. Tente novamente mais tarde');
@@ -70,7 +78,10 @@ function Guests({ navigation }) {
     const carregarConvidados = async () => {
         setSelectedBoxes(0);
         const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
-        api.get(`/convidado/${sociCodigo}`)
+        const token = await AsyncStorage.getItem('token');
+        api.get(`/convidado/${sociCodigo}`, {
+            headers: { 'x-access-token': token }
+        })
             .then(function (response) {
                 setTableData(response.data);
                 setTableState(response.data.map(() => false));
@@ -131,6 +142,7 @@ function Guests({ navigation }) {
         if (selectedBoxes == 0 || selectedBoxes == null) {
             alert('Selecione as pessoas que deseja convidar para o Clube');
         } else {
+            const token = await AsyncStorage.getItem('token');
             setModalSaveVisibility(!modalSaveVisibility);
             api.post('/agenda', {
                 codigo: 7,
@@ -138,6 +150,8 @@ function Guests({ navigation }) {
                 diaSemana: dias[data.getDay()],
                 qtdConvidado: selectedBoxes,
                 dataIncl: moment().format('DD/MM/YYYY')
+            },{
+                headers : {'x-access-token' : token}
             }).then((response) => {
                 if (response.data) {
                     inserirConvidadosAgenda(7);
@@ -160,12 +174,15 @@ function Guests({ navigation }) {
                 return convidado;
             }
         })
+        const token = await AsyncStorage.getItem('token');
         api.post('/agendaConvidado', {
             agenCodigo,
             convidados,
             socio: sociCodigo,
             observacao: "",
             dataIncl: moment().format('DD/MM/YYYY')
+        },{
+            headers : {'x-access-token' : token}
         })
             .then((response) => {
                 if (response.data) {
