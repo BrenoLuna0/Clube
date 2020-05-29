@@ -48,7 +48,7 @@ function Guests({ navigation }) {
             alert('Campo de nome é obrigatório');
         } else {
             const token = await AsyncStorage.getItem('token');
-            const codigo = await api.post('/gerarIdConvidado', {}, {
+            const codigo = await api.get('/gerarIdConvidado', {
                 headers: { 'x-access-token': token }
             }).then(function (response) {
                 return response.data;
@@ -142,10 +142,16 @@ function Guests({ navigation }) {
         if (selectedBoxes == 0 || selectedBoxes == null) {
             alert('Selecione as pessoas que deseja convidar para o Clube');
         } else {
-            const token = await AsyncStorage.getItem('token');
             setModalSaveVisibility(!modalSaveVisibility);
+            const token = await AsyncStorage.getItem('token');
+            const codigo = await api.get('/gerarIdAgenda',{
+                headers : {'x-access-token' : token}
+            }).catch((err)=>{
+                console.log(err);
+                alert('Erro ao agendar data');
+            })
             api.post('/agenda', {
-                codigo: 7,
+                codigo,
                 data: moment(data).format('DD/MM/YYYY'),
                 diaSemana: dias[data.getDay()],
                 qtdConvidado: selectedBoxes,
@@ -154,7 +160,7 @@ function Guests({ navigation }) {
                 headers : {'x-access-token' : token}
             }).then((response) => {
                 if (response.data) {
-                    inserirConvidadosAgenda(7);
+                    inserirConvidadosAgenda(codigo);
                     //alert('Data agendada');
                     //setModalSaveVisibility(false);
                 }
