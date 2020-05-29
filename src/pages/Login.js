@@ -49,7 +49,6 @@ function Login({ navigation }) {
       </View>
       <View style={{ marginTop: 100 }}></View>
       <View style={styles.inputBlock}>
-        <Text style={styles.text}>Número do Titular ou CPF</Text>
         <TextInput
           keyboardType={"number-pad"}
           type={"custom"}
@@ -61,14 +60,15 @@ function Login({ navigation }) {
             setNumTitulo(text);
           }}
           mask
+          label="Número do Titular ou CPF"
         />
       </View>
       <View style={styles.inputBlock}>
-        <Text style={styles.text}>Senha</Text>
         <TextInput
           value={senha}
           secureTextEntry={true}
           onChangeText={(senha) => setSenha(senha)}
+          label="Senha"
         />
       </View>
       <View style={styles.button}>

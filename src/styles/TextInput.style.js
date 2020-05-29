@@ -11,7 +11,6 @@ export default StyleSheet.create({
     height: 48,
   },
   label: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 14,
   },
 });
