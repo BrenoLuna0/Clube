@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Text, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage, ActivityIndicator } from 'react-native'
+import { View, TextInput, Text, ScrollView, TouchableOpacity, Modal, Button, AsyncStorage, ActivityIndicator, Alert } from 'react-native'
 import { TextInputMask } from 'react-native-masked-text';
 import { Table, Row } from 'react-native-table-component';
 import { CheckBox } from 'react-native-elements'
@@ -196,7 +196,17 @@ function Guests({ navigation }) {
         })
             .then((response) => {
                 if (response.data) {
-                    alert('Data agendada');
+                    Alert.alert(
+                        'Data Agendada',
+                        'Estamos esperando você e seus convidados neste dia!',
+                        [
+                            {
+                                text : 'Ok',
+                                onPress : ()=>{navigation.navigate('Home', {})}
+                            }
+                        ],
+                        { cancelable: false }
+                    )
                     setModalSaveVisibility(false);
                 }
             })
@@ -323,6 +333,7 @@ function Guests({ navigation }) {
                         style={styles.button}
                         onPress={() => {
                             inserirAgenda();
+
                         }}
                     >
                         <Text style={{
