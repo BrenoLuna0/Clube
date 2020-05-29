@@ -146,7 +146,11 @@ function Guests({ navigation }) {
             const token = await AsyncStorage.getItem('token');
             const codigo = await api.get('/gerarIdAgenda',{
                 headers : {'x-access-token' : token}
-            }).catch((err)=>{
+            })
+            .then((response)=>{
+                return response.data[0];
+            })
+            .catch((err)=>{
                 console.log(err);
                 alert('Erro ao agendar data');
             })
@@ -175,7 +179,7 @@ function Guests({ navigation }) {
 
     const inserirConvidadosAgenda = async (agenCodigo) => {
         const sociCodigo = await AsyncStorage.getItem('SOCI_CODIGO');
-        const convidados = tableData.map((convidado, index) => {
+        const convidados = tableData.filter((convidado, index) => {
             if (tableState[index]) {
                 return convidado;
             }
