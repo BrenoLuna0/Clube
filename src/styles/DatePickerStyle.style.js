@@ -89,7 +89,6 @@ export default StyleSheet.create({
     container: {
         height: '80%',
         width: '100%',
-        backgroundColor: '#FFFFFF',
         marginTop: 0,
     },
     buttonBox: {

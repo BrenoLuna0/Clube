@@ -24,7 +24,6 @@ export default StyleSheet.create({
         paddingVertical: 1
     },
     exampleContainerLight: {
-        backgroundColor: 'white'
     },
     
     

@@ -5,19 +5,12 @@ import styles from '../styles/DatePickerStyle.style';
 
 function DatePicker({ navigation }) {
     const [selectedStartDate, setSelectedStartDate] = useState(null);
-    const [selectedEndDate, setSelectedEndDate] = useState(null);
 
-    function onDateChange(date, type) {
-        if (type === 'END_DATE') {
-            setSelectedEndDate(date);
-        } else {
-            setSelectedStartDate(date);
-            setSelectedEndDate(null);
-        }
 
+    const onDateChange = (date) => {
+        setSelectedStartDate(date);
     }
-    const startDate = selectedStartDate ? selectedStartDate.toString() : '';
-    const endDate = selectedEndDate ? selectedEndDate.toString() : '';
+
 
     return (
         <>
@@ -48,12 +41,12 @@ function DatePicker({ navigation }) {
                             style={styles.buttonBox}
                             onPress={() => {
                                 const data = new Date(selectedStartDate);
-                                if(data.getDay() == 0 || data.getDay() == 6){
-                                    navigation.navigate('Guests2', { limite :  1 , data : selectedStartDate});
-                                }else{
-                                    navigation.navigate('Guests2', { limite :  2 , data : selectedStartDate});
+                                if (data.getDay() == 0 || data.getDay() == 6) {
+                                    navigation.navigate('Guests2', { limite: 1, data: selectedStartDate });
+                                } else {
+                                    navigation.navigate('Guests2', { limite: 2, data: selectedStartDate });
                                 }
-                                
+
                             }}
                         >
                             <Text style={styles.buttonText}> Próximo </Text>

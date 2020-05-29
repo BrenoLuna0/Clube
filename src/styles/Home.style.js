@@ -25,7 +25,7 @@ export default StyleSheet.create({
         position: 'relative',
         width: '100%',
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
 
     input: {
@@ -44,7 +44,7 @@ export default StyleSheet.create({
 
     text: {
         fontSize: 16,
-        color: '#D91122',
+        color: '#3B3F8C',
         fontWeight: 'bold',
         marginLeft: 3,
         marginRight: 3
@@ -81,7 +81,7 @@ export default StyleSheet.create({
         justifyContent: "center",
         borderWidth: 2,
         borderStyle: 'solid',
-        borderColor: '#D91122',
+        borderColor: '#3B3F8C',
         borderRadius: 10,
         height: '100%',
 
