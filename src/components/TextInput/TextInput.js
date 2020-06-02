@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
-import styles from "../styles/TextInput.style";
+import styles from "./TextInput.style";
 
 function Component({ label, mask, ...props }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      <View style={styles.label}>
+        <Text style={styles.labelText}>{label}</Text>
+      </View>
       {mask ? (
         <TextInputMask style={styles.input} {...props} />
       ) : (

@@ -8,9 +8,20 @@ export default StyleSheet.create({
     marginVertical: 8,
   },
   input: {
-    height: 48,
+    height: 36,
+    fontSize: 20,
+    height: 56,
+    paddingHorizontal: 12,
   },
   label: {
-    fontSize: 14,
+    position: "absolute",
+    left: 8,
+    top: -11,
+    paddingHorizontal: 4,
+  },
+
+  labelText: {
+    backgroundColor: "#F2F2F2",
+    fontSize: 15,
   },
 });

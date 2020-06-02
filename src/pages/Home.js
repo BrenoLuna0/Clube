@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-native-snap-carousel";
 import LinearGradient from "react-native-linear-gradient";
-import SliderEntry from "../components/SliderEntry";
+import SliderEntry from "../components/SliderEntry/SliderEntry";
 import styles, { colors } from "../styles/index.style";
 import stylesLocal from "../styles/Home.style";
-import { sliderWidth, itemWidth } from "../styles/SliderEntry.style";
+import {
+  sliderWidth,
+  itemWidth,
+} from "../components/SliderEntry/SliderEntry.style";
 import {
   View,
   Text,
