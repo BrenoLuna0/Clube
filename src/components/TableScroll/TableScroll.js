@@ -5,30 +5,7 @@ import CheckBox from "../CheckBox/CheckBox";
 import UserBox from "../UserBox/UserBox";
 import styles from "./TableScroll.style";
 
-function Component({ tableData }) {
-  const handleCheckboxClick = (checkBox) => {
-    setTableState((state) =>
-      state.map((item, index) => {
-        if (checkBox == index) {
-          if (item == false) {
-            if (selectedBoxes < limit) {
-              setSelectedBoxes(selectedBoxes + 1);
-              return !item;
-            } else {
-              alert("Número máximo de convidados atingidos");
-              return item;
-            }
-          } else {
-            setSelectedBoxes(selectedBoxes - 1);
-            return !item;
-          }
-        } else {
-          return item;
-        }
-      })
-    );
-  };
-
+function Component({ tableData, tableState, handleCheckboxClick }) {
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -41,7 +18,11 @@ function Component({ tableData }) {
               key={index}
               flexArr={[1, 4]}
               data={[
-                <CheckBox index={index} />,
+                <CheckBox
+                  index={index}
+                  checked={tableState[index]}
+                  onPress={() => handleCheckboxClick(index)}
+                />,
                 <UserBox convidado={convidado} />,
               ]}
               textStyle={{ color: "#535467", fontWeight: "bold" }}

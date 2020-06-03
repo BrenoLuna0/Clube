@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  AsyncStorage,
-  Alert,
-} from "react-native";
-import { Table, Row } from "react-native-table-component";
-import { CheckBox } from "react-native-elements";
+import { View, Text, AsyncStorage, Alert } from "react-native";
 import moment from "moment";
 import api from "../services/api";
 import styles from "../styles/Guests.style";
@@ -16,6 +7,7 @@ import DefaultButton from "../components/DefaultButton/DefaultButton";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import AddGuestScreen from "../components/AddGuestScreen/AddGuestScreen";
 import TableScroll from "../components/TableScroll/TableScroll";
+import PlusButton from "../components/PlusButton/PlusButton";
 
 function Guests({ navigation }) {
   const [title, setTitle] = useState("Adicione seus Convidados na Lista");
@@ -76,6 +68,29 @@ function Guests({ navigation }) {
       .catch(function (err) {
         console.log(err);
       });
+  };
+
+  const handleCheckboxClick = (checkBox) => {
+    setTableState((state) =>
+      state.map((item, index) => {
+        if (checkBox == index) {
+          if (item == false) {
+            if (selectedBoxes < limit) {
+              setSelectedBoxes(selectedBoxes + 1);
+              return !item;
+            } else {
+              alert("Número máximo de convidados atingidos");
+              return item;
+            }
+          } else {
+            setSelectedBoxes(selectedBoxes - 1);
+            return !item;
+          }
+        } else {
+          return item;
+        }
+      })
+    );
   };
 
   const inserirAgenda = async () => {
@@ -200,19 +215,12 @@ function Guests({ navigation }) {
         />
         <LoadingScreen visible={modalVisibility} transparent={true} />
         <LoadingScreen visible={modalSaveVisibility} transparent={true} />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <Text style={styles.text}>+</Text>
-          </TouchableOpacity>
-        </View>
-
-        <TableScroll tableData={tableData} />
-
+        <PlusButton onPress={() => setModalVisible(!modalVisible)} />
+        <TableScroll
+          tableData={tableData}
+          tableState={tableState}
+          handleCheckboxClick={handleCheckboxClick}
+        />
         <View style={styles.bottomButton}>
           <DefaultButton
             onPress={() => {

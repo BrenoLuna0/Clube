@@ -78,7 +78,7 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
             mask="999.999.999-99"
             onChangeText={(text) => {
               setCpf(text);
-              if (text === "") {
+              if (text == "" || text == null) {
                 setTipo("I");
               } else {
                 setTipo("A");
