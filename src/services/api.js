@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://192.168.15.8:3013/api",
+  baseURL: "https://clube-aquarius.herokuapp.com/api",
 });
 
 export default api;

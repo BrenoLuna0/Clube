@@ -24,7 +24,9 @@ function DatePicker({ navigation }) {
           <CalendarPicker
             onDateChange={onDateChange}
             allowRangeSelection={false}
-            selectedDayColor={"#03A64A"}
+            selectedDayColor={"#3B3F8C"}
+            selectedDayTextColor={"#F3F3F3"}
+            todayTextStyle={{ color: "black" }}
             weekdays={["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]}
             months={[
               "Janeiro",

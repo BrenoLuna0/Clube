@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "react-native-snap-carousel";
-import LinearGradient from "react-native-linear-gradient";
 import SliderEntry from "../components/SliderEntry/SliderEntry";
-import styles, { colors } from "../styles/index.style";
+import styles from "../styles/index.style";
 import stylesLocal from "../styles/Home.style";
 import {
   sliderWidth,
@@ -21,6 +20,7 @@ import {
 import { ENTRIES1 } from "../static/entries";
 import { isSignedIn, onSignOut } from "../services/auth";
 import { getCurrentRoute } from "../services/navigation";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 function Home({ navigation }) {
   const SLIDER_1_FIRST_ITEM = 1;
@@ -94,17 +94,6 @@ function Home({ navigation }) {
     );
   }
 
-  function gradient() {
-    return (
-      <LinearGradient
-        colors={[colors.background1, colors.background2]}
-        startPoint={{ x: 1, y: 0 }}
-        endPoint={{ x: 0, y: 1 }}
-        style={styles.gradient}
-      />
-    );
-  }
-
   async function getNome() {
     if (await isSignedIn()) {
       setUsuario(await (await AsyncStorage.getItem("SOCI_NOME")).split(" "));
@@ -118,7 +107,7 @@ function Home({ navigation }) {
     "Default layout | Loop | Autoplay | Parallax | Scale | Opacity | Pagination with tappable dots"
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", backAction);
     getNome();
     return () =>
@@ -150,9 +139,14 @@ function Home({ navigation }) {
           <View style={stylesLocal.buttonTopLeft}>
             <TouchableOpacity
               style={stylesLocal.button}
-              //onPress={}
+              onPress={() => {
+                alert(
+                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações"
+                );
+              }}
             >
-              <Text style={stylesLocal.buttonText}> Adicionar Dependente </Text>
+              <Icon name="users" color="#F3F3F3" size={36} />
+              <Text style={stylesLocal.buttonText}> Dependentes </Text>
             </TouchableOpacity>
           </View>
           <View style={stylesLocal.buttonTopRight}>
@@ -162,24 +156,34 @@ function Home({ navigation }) {
                 navigation.navigate("DatePicker", {});
               }}
             >
-              <Text style={stylesLocal.buttonText}> Adicionar Convidados </Text>
+              <Icon name="calendar" color="#F3F3F3" size={36} />
+              <Text style={stylesLocal.buttonText}> Agendar Visita </Text>
             </TouchableOpacity>
           </View>
           <View style={stylesLocal.buttonBottomLeft}>
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                navigation.navigate("Activities", {});
+                //navigation.navigate("Activities", {});
+                alert(
+                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações"
+                );
               }}
             >
-              <Text style={stylesLocal.buttonText}> Grade de Horário </Text>
+              <Icon name={"clock-o"} color="#F3F3F3" size={36} />
+              <Text style={stylesLocal.buttonText}> Horário </Text>
             </TouchableOpacity>
           </View>
           <View style={stylesLocal.buttonBottomRight}>
             <TouchableOpacity
               style={stylesLocal.button}
-              //onPress={}
+              onPress={() => {
+                alert(
+                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações"
+                );
+              }}
             >
+              <Icon name={"gear"} color="#F3F3F3" size={36} />
               <Text style={stylesLocal.buttonText}> Sobre </Text>
             </TouchableOpacity>
           </View>
