@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Modal, View, Text, AsyncStorage } from "react-native";
-import { TextInputMask } from "react-native-masked-text";
 import api from "../../services/api";
 import DefaultButton from "../DefaultButton/DefaultButton";
 import CancelButton from "../CancelButton/CancelButton";
@@ -19,18 +18,10 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
       closeModal();
       loadingScreen();
       const token = await AsyncStorage.getItem("token");
-      const codigo = await api
-        .get("/gerarIdConvidado", {
-          headers: { "x-access-token": token },
-        })
-        .then(function (response) {
-          return response.data;
-        });
       api
         .post(
           "/convidado",
           {
-            codigo: codigo[0],
             nome: name.toUpperCase(),
             socio: await AsyncStorage.getItem("SOCI_CODIGO"),
             tipo,

@@ -99,26 +99,14 @@ function Guests({ navigation }) {
     } else {
       setModalSaveVisibility(!modalSaveVisibility);
       const token = await AsyncStorage.getItem("token");
-      const codigo = await api
-        .get("/gerarIdAgenda", {
-          headers: { "x-access-token": token },
-        })
-        .then((response) => {
-          return response.data[0];
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Erro ao agendar data");
-        });
       api
         .post(
           "/agenda",
           {
-            codigo,
-            data: moment(data).format("DD/MM/YYYY"),
+            data: moment(data).format("MM/DD/YYYY"),
             diaSemana: dias[data.getDay()],
             qtdConvidado: selectedBoxes,
-            dataIncl: moment().format("DD/MM/YYYY"),
+            dataIncl: moment().format("MM/DD/YYYY"),
           },
           {
             headers: { "x-access-token": token },
@@ -126,7 +114,7 @@ function Guests({ navigation }) {
         )
         .then((response) => {
           if (response.data) {
-            inserirConvidadosAgenda(codigo);
+            inserirConvidadosAgenda(response.data[0].AGEN_CODIGO);
             //alert('Data agendada');
             //setModalSaveVisibility(false);
           }
@@ -157,7 +145,7 @@ function Guests({ navigation }) {
           convidados,
           socio: sociCodigo,
           observacao: "",
-          dataIncl: moment().format("DD/MM/YYYY"),
+          dataIncl: moment().format("MM/DD/YYYY"),
         },
         {
           headers: { "x-access-token": token },
