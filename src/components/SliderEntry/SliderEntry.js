@@ -19,7 +19,6 @@ export default class SliderEntry extends Component {
       parallaxProps,
       even,
     } = this.props;
-
     return parallax ? (
       <ParallaxImage
         source={{ uri: illustration }}
@@ -30,7 +29,6 @@ export default class SliderEntry extends Component {
         style={styles.image}
         parallaxFactor={0.35}
         showSpinner={true}
-        //spinnerColor={even ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.25)'}
         {...parallaxProps}
       />
     ) : (

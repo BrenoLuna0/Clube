@@ -33,25 +33,25 @@ export default StyleSheet.create({
     left: itemHorizontalMargin,
     right: itemHorizontalMargin,
     bottom: 18,
-    shadowColor: colors.black,
-    shadowOpacity: 0.25,
+    //shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 10 },
     shadowRadius: 10,
     borderRadius: entryBorderRadius,
   },
   imageContainer: {
+    backgroundColor: "#3B3F8C",
     height: slideHeight,
     marginBottom: IS_IOS ? 0 : -1, // Prevent a random Android rendering issue
-    backgroundColor: "white",
+    zIndex: 100,
+    opacity: 0.7,
+
     //borderRadius : entryBorderRadius,
     /*borderTopLeftRadius: entryBorderRadius,
         borderTopRightRadius: entryBorderRadius,
         borderBottomLeftRadius : entryBorderRadius,
         borderBottomRightRadius : entryBorderRadius*/
   },
-  imageContainerEven: {
-    backgroundColor: colors.black,
-  },
+  imageContainerEven: {},
   image: {
     ...StyleSheet.absoluteFillObject,
     resizeMode: "cover",
@@ -68,15 +68,11 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     height: entryBorderRadius,
-    backgroundColor: "white",
   },
-  radiusMaskEven: {
-    backgroundColor: colors.black,
-  },
+  radiusMaskEven: {},
   textContainer: {
     justifyContent: "center",
     paddingHorizontal: 16,
-    backgroundColor: "white",
     borderBottomLeftRadius: entryBorderRadius,
     borderBottomRightRadius: entryBorderRadius,
   },

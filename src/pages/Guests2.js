@@ -10,7 +10,9 @@ import TableScroll from "../components/TableScroll/TableScroll";
 import PlusButton from "../components/PlusButton/PlusButton";
 
 function Guests({ navigation }) {
-  const [title, setTitle] = useState("Adicione seus Convidados na Lista");
+  const [title, setTitle] = useState(
+    'Marque os convidados da sua lista de amigos que deseja chamar. Para Adicionar novos convidados na lista utilize o botão "+"'
+  );
   const [tableData, setTableData] = useState([]);
   const [tableState, setTableState] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -192,9 +194,15 @@ function Guests({ navigation }) {
           visible={modalVisible}
           finish={() => {
             carregarConvidados();
+            setTitle(
+              'Marque os convidados da sua lista de amigos que deseja chamar. Para Adicionar novos convidados na lista utilize o botão "+"'
+            );
             setModalVisible(!modalVisible);
           }}
           closeModal={() => {
+            setTitle(
+              'Marque os convidados da sua lista de amigos que deseja chamar. Para Adicionar novos convidados na lista utilize o botão "+"'
+            );
             setModalVisible(!modalVisible);
           }}
           loadingScreen={() => {
@@ -203,7 +211,12 @@ function Guests({ navigation }) {
         />
         <LoadingScreen visible={modalVisibility} transparent={true} />
         <LoadingScreen visible={modalSaveVisibility} transparent={true} />
-        <PlusButton onPress={() => setModalVisible(!modalVisible)} />
+        <PlusButton
+          onPress={() => {
+            setModalVisible(!modalVisible);
+            setTitle("Adicione um amigo na sua lista");
+          }}
+        />
         <TableScroll
           tableData={tableData}
           tableState={tableState}

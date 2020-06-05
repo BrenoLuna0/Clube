@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
 
   text: {
-    fontSize: 19,
+    fontSize: 16,
     textAlign: "center",
     color: "#F2EFEA",
     fontWeight: "bold",
@@ -80,7 +80,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "90%",
-    height: 60,
+    height: 70,
     borderStyle: "solid",
     borderWidth: 2,
     borderColor: "#F2EFEA",

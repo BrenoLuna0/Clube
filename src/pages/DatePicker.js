@@ -50,17 +50,19 @@ function DatePicker({ navigation }) {
         <View style={styles.login}>
           <DefaultButton
             onPress={() => {
-              const data = new Date(selectedStartDate);
-              if (data.getDay() == 0 || data.getDay() == 6) {
-                navigation.navigate("Guests2", {
-                  limite: 1,
-                  data: selectedStartDate,
-                });
+              if (selectedStartDate == null) {
+                alert("Selecione uma data!");
               } else {
-                navigation.navigate("Guests2", {
-                  limite: 2,
-                  data: selectedStartDate,
-                });
+                const data = new Date(selectedStartDate);
+                data.getDay() == 0 || data.getDay() == 6
+                  ? navigation.navigate("Guests2", {
+                      limite: 1,
+                      data: selectedStartDate,
+                    })
+                  : navigation.navigate("Guests2", {
+                      limite: 2,
+                      data: selectedStartDate,
+                    });
               }
             }}
             title="Próximo"
