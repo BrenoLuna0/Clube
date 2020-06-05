@@ -42,8 +42,9 @@ export default StyleSheet.create({
     backgroundColor: "#3B3F8C",
     height: slideHeight,
     marginBottom: IS_IOS ? 0 : -1, // Prevent a random Android rendering issue
-    zIndex: 100,
-    opacity: 0.7,
+    //zIndex: 100,
+    //opacity: 0.7,
+    borderRadius: 8,
 
     //borderRadius : entryBorderRadius,
     /*borderTopLeftRadius: entryBorderRadius,
