@@ -205,8 +205,8 @@ function Guests({ navigation }) {
             );
             setModalVisible(!modalVisible);
           }}
-          loadingScreen={() => {
-            setModalVisibility(true);
+          loadingScreen={(value) => {
+            setModalVisibility(value);
           }}
         />
         <LoadingScreen visible={modalVisibility} transparent={true} />

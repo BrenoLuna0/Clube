@@ -16,7 +16,7 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
       alert("Campo de nome é obrigatório");
     } else {
       closeModal();
-      loadingScreen();
+      loadingScreen(true);
       const token = await AsyncStorage.getItem("token");
       api
         .post(
@@ -33,15 +33,22 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
         )
         .then(function (response) {
           if (!response.data) {
+            closeModal();
+            loadingScreen(false);
             alert(
               "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde"
             );
+          } else if (response.data == 1) {
+            closeModal();
+            loadingScreen(false);
+            alert("Este convidado já está na sua lista");
           } else {
             finish();
           }
         })
         .catch(function (err) {
           console.log(err);
+          closeModal();
           alert(
             "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde"
           );
