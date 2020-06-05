@@ -10,7 +10,7 @@ import DefaultButton from "../components/DefaultButton/DefaultButton";
 function Login({ navigation }) {
   const [numTitulo, setNumTitulo] = useState("");
   const [senha, setSenha] = useState("");
-  const [mask, setMask] = useState("999.999.999-99");
+  const [mask, setMask] = useState("999999999");
   const [modalVisibility, setModalVisibility] = useState(false);
 
   return (
@@ -39,6 +39,11 @@ function Login({ navigation }) {
           }}
           value={numTitulo}
           onChangeText={(text) => {
+            if (text.length > 5) {
+              setMask("999.999.999-99");
+            } else {
+              setMask("999999999");
+            }
             setNumTitulo(text);
           }}
           mask
