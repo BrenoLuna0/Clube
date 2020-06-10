@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, Image, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StatusBar,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { onSignIn } from "../services/auth";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import styles from "../styles/Login.style";
 import TextInput from "../components/TextInput/TextInput";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
@@ -14,10 +20,12 @@ function Login({ navigation }) {
   const [modalVisibility, setModalVisibility] = useState(false);
 
   return (
-    <KeyboardAwareScrollView
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={styles.containerMaster}
-      scrollEnabled={false}
+    <KeyboardAvoidingView
+      //resetScrollToCoords={{ x: 0, y: 0 }}
+      //contentContainerStyle={styles.containerMaster}
+      //scrollEnabled={false}
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={styles.containerMaster}
     >
       <StatusBar backgroundColor="#3B3F8C" barStyle="light-content" />
       <LoadingScreen visible={modalVisibility} transparent={true} />
@@ -85,7 +93,7 @@ function Login({ navigation }) {
         title={"CADASTRAR"}
       />
       <View style={{ height: 60 }}></View>
-    </KeyboardAwareScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
