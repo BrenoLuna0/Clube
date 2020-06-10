@@ -25,6 +25,12 @@
       "package": "com.csm.clube",
       "versionCode": 1
     },
-    "description": ""
+    "description": "",
+    "androidStatusBar": {
+      "hidden": false,
+      "translucent": true,
+      "barStyle": "light-content",
+      "backgroundColor": "#3B3F8C"
+    }
   }
 }
