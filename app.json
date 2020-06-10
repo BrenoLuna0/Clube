@@ -18,11 +18,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.csm.clube",
+      "bundleIdentifier": "com.Csm.Clube",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.csm.clube",
+      "package": "com.Csm.Clube",
       "versionCode": 1
     },
     "description": "",
