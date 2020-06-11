@@ -6,6 +6,7 @@ import {
   StatusBar,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import { onSignIn } from "../services/auth";
 import styles from "../styles/Login.style";
@@ -28,6 +29,7 @@ function Login({ navigation }) {
         //scrollEnabled={false}
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.containerMaster}
+        keyboardVerticalOffset={40}
       >
         <LoadingScreen visible={modalVisibility} transparent={true} />
         <View style={styles.header}>
@@ -68,6 +70,7 @@ function Login({ navigation }) {
           />
         </View>
         <View style={{ height: 5 }}></View>
+
         <DefaultButton
           onPress={async () => {
             setModalVisibility(true);
@@ -79,7 +82,15 @@ function Login({ navigation }) {
               setModalVisibility(false);
             } else {
               setModalVisibility(false);
-              alert("Numero de titular ou senha inválida");
+              Alert.alert(
+                "Erro no Login",
+                "Número do Titular/CPF ou Senha inválidos",
+                [
+                  {
+                    text: "Ok",
+                  },
+                ]
+              );
             }
           }}
           title={"ENTRAR"}
@@ -87,12 +98,6 @@ function Login({ navigation }) {
         <Text style={styles.link}>Esqueceu a senha?</Text>
 
         <View style={styles.register}></View>
-        <DefaultButton
-          onPress={() => {
-            navigation.navigate("Register", {});
-          }}
-          title={"CADASTRAR"}
-        />
         <View style={{ height: 60 }}></View>
       </KeyboardAvoidingView>
     </>

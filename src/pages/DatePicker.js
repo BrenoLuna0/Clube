@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import DefaultButton from "../components/DefaultButton/DefaultButton";
 import styles from "../styles/DatePickerStyle.style";
@@ -51,7 +51,11 @@ function DatePicker({ navigation }) {
           <DefaultButton
             onPress={() => {
               if (selectedStartDate == null) {
-                alert("Selecione uma data!");
+                Alert.alert("Selecione uma Data!", "", [
+                  {
+                    text: "Ok",
+                  },
+                ]);
               } else {
                 const data = new Date(selectedStartDate);
                 data.getDay() == 0 || data.getDay() == 6

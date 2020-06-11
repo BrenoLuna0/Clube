@@ -81,7 +81,15 @@ function Guests({ navigation }) {
               setSelectedBoxes(selectedBoxes + 1);
               return !item;
             } else {
-              alert("Número máximo de convidados atingidos");
+              Alert.alert(
+                "Número Máximo de convidados atingido",
+                `O limite de convidados para o dia que você escolheu é de ${limit} pessoas`,
+                [
+                  {
+                    text: "Ok",
+                  },
+                ]
+              );
               return item;
             }
           } else {
@@ -97,7 +105,11 @@ function Guests({ navigation }) {
 
   const inserirAgenda = async () => {
     if (selectedBoxes == 0 || selectedBoxes == null) {
-      alert("Selecione as pessoas que deseja convidar para o Clube");
+      Alert.alert("Selecione as pessoas que deseja convidar para o Clube", "", [
+        {
+          text: "Ok",
+        },
+      ]);
     } else {
       setModalSaveVisibility(!modalSaveVisibility);
       const token = await AsyncStorage.getItem("token");
@@ -123,8 +135,14 @@ function Guests({ navigation }) {
         })
         .catch((err) => {
           console.log(err);
-          alert(
-            "Houve um erro ao convidar os seus amigos, tente novamente mais tarde"
+          Alert.alert(
+            "Houve um erro ao convidar os seus amigos, tente novamente mais tarde",
+            "",
+            [
+              {
+                text: "Ok",
+              },
+            ]
           );
           setModalSaveVisibility(false);
         });
@@ -173,8 +191,14 @@ function Guests({ navigation }) {
       })
       .catch((err) => {
         console.log(err);
-        alert(
-          "Houve um erro ao convidar os seus amigos, tente novamente mais tarde"
+        Alert.alert(
+          "Houve um erro ao convidar os seus amigos, tente novamente mais tarde",
+          "",
+          [
+            {
+              text: "Ok",
+            },
+          ]
         );
         setModalSaveVisibility(false);
       });

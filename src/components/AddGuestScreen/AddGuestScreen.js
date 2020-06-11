@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, View, Text, AsyncStorage } from "react-native";
+import { Modal, View, Text, AsyncStorage, Alert } from "react-native";
 import api from "../../services/api";
 import DefaultButton from "../DefaultButton/DefaultButton";
 import CancelButton from "../CancelButton/CancelButton";
@@ -13,7 +13,11 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
 
   const addGuest = async () => {
     if (name === "") {
-      alert("Campo de nome é obrigatório");
+      Alert.alert("Campo de nome é obrigatório", "", [
+        {
+          text: "Ok",
+        },
+      ]);
     } else {
       closeModal();
       loadingScreen(true);
@@ -35,13 +39,23 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
           if (!response.data) {
             closeModal();
             loadingScreen(false);
-            alert(
-              "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde"
+            Alert.alert(
+              "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde",
+              "",
+              [
+                {
+                  text: "Ok",
+                },
+              ]
             );
           } else if (response.data == 1) {
             closeModal();
             loadingScreen(false);
-            alert("Este convidado já está na sua lista");
+            Alert.alert("Este convidado já está na sua lista", "", [
+              {
+                text: "Ok",
+              },
+            ]);
           } else {
             finish();
           }
@@ -49,8 +63,14 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
         .catch(function (err) {
           console.log(err);
           closeModal();
-          alert(
-            "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde"
+          Alert.alert(
+            "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde",
+            "",
+            [
+              {
+                text: "Ok",
+              },
+            ]
           );
         });
     }

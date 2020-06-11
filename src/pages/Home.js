@@ -140,8 +140,14 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                alert(
-                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações"
+                Alert.alert(
+                  "Alerta",
+                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
+                  [
+                    {
+                      text: "Ok",
+                    },
+                  ]
                 );
               }}
             >
@@ -165,8 +171,14 @@ function Home({ navigation }) {
               style={stylesLocal.button}
               onPress={() => {
                 //navigation.navigate("Activities", {});
-                alert(
-                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações"
+                Alert.alert(
+                  "Alerta",
+                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
+                  [
+                    {
+                      text: "Ok",
+                    },
+                  ]
                 );
               }}
             >
@@ -178,8 +190,14 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                alert(
-                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações"
+                Alert.alert(
+                  "Alerta",
+                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
+                  [
+                    {
+                      text: "Ok",
+                    },
+                  ]
                 );
               }}
             >
