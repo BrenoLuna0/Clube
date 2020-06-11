@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Carousel from "react-native-snap-carousel";
 import SliderEntry from "../components/SliderEntry/SliderEntry";
 import styles from "../styles/index.style";
@@ -16,6 +16,7 @@ import {
   AsyncStorage,
   BackHandler,
   Alert,
+  Animated,
 } from "react-native";
 import { ENTRIES1 } from "../static/entries";
 import { isSignedIn, onSignOut } from "../services/auth";
@@ -23,6 +24,8 @@ import { getCurrentRoute } from "../services/navigation";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 function Home({ navigation }) {
+  const slideAnim = useRef(new Animated.Value(-400)).current;
+
   const SLIDER_1_FIRST_ITEM = 1;
 
   const [slider1ActiveSlide, setSlider1ActiveSlide] = useState(
@@ -108,6 +111,11 @@ function Home({ navigation }) {
   );
 
   useEffect(() => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 2500,
+    }).start();
+
     BackHandler.addEventListener("hardwareBackPress", backAction);
     getNome();
     return () =>
@@ -136,7 +144,9 @@ function Home({ navigation }) {
       </View>
       <View style={stylesLocal.content}>
         <View style={stylesLocal.actionMenuButtons}>
-          <View style={stylesLocal.buttonTopLeft}>
+          <Animated.View
+            style={[stylesLocal.buttonTopLeft, { left: slideAnim }]}
+          >
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
@@ -154,8 +164,10 @@ function Home({ navigation }) {
               <Icon name="users" color="#F3F3F3" size={36} />
               <Text style={stylesLocal.buttonText}> Dependentes </Text>
             </TouchableOpacity>
-          </View>
-          <View style={stylesLocal.buttonTopRight}>
+          </Animated.View>
+          <Animated.View
+            style={[stylesLocal.buttonTopRight, { right: slideAnim }]}
+          >
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
@@ -165,8 +177,10 @@ function Home({ navigation }) {
               <Icon name="calendar" color="#F3F3F3" size={36} />
               <Text style={stylesLocal.buttonText}> Agendar Visita </Text>
             </TouchableOpacity>
-          </View>
-          <View style={stylesLocal.buttonBottomLeft}>
+          </Animated.View>
+          <Animated.View
+            style={[stylesLocal.buttonBottomLeft, { left: slideAnim }]}
+          >
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
@@ -185,8 +199,10 @@ function Home({ navigation }) {
               <Icon name={"clock-o"} color="#F3F3F3" size={36} />
               <Text style={stylesLocal.buttonText}> Horário </Text>
             </TouchableOpacity>
-          </View>
-          <View style={stylesLocal.buttonBottomRight}>
+          </Animated.View>
+          <Animated.View
+            style={[stylesLocal.buttonBottomRight, { right: slideAnim }]}
+          >
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
@@ -204,7 +220,7 @@ function Home({ navigation }) {
               <Icon name={"gear"} color="#F3F3F3" size={36} />
               <Text style={stylesLocal.buttonText}> Sobre </Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
         </View>
       </View>
     </>

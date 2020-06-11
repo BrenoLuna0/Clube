@@ -6,7 +6,6 @@ export default StyleSheet.create({
   containerMaster: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
   },
   logo: {
     height: IMAGE_HEIGHT,
@@ -18,29 +17,17 @@ export default StyleSheet.create({
   header: {
     backgroundColor: "#3B3F8C",
     alignItems: "center",
-    position: "relative",
     width: "100%",
-    height: "38%",
-    marginTop: "-5%",
-  },
-
-  containerChild: {
-    position: "absolute",
-    backgroundColor: "#F2EFEA",
-    justifyContent: "center",
-    borderRadius: 85,
-    width: 170,
-    height: 170,
-    bottom: -85,
   },
 
   containerChildImage: {
-    position: "absolute",
     backgroundColor: "#F2EFEA",
     justifyContent: "center",
     borderRadius: 85,
     width: 170,
     height: 170,
+    marginTop: 85,
+    marginBottom: -85,
   },
 
   input: {

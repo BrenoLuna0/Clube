@@ -19,29 +19,24 @@ function Login({ navigation }) {
   const [senha, setSenha] = useState("");
   const [mask, setMask] = useState("999999999");
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [secureText, setSecureText] = useState(true);
 
   return (
     <>
       <StatusBar backgroundColor="#3B3F8C" barStyle="light-content" />
       <KeyboardAvoidingView
-        //resetScrollToCoords={{ x: 0, y: 0 }}
-        //contentContainerStyle={styles.containerMaster}
-        //scrollEnabled={false}
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        behavior={Platform.OS == "ios" ? "padding" : "position"}
         style={styles.containerMaster}
-        keyboardVerticalOffset={40}
+        contentContainerStyle={[styles.containerMaster, { width: "100%" }]}
       >
         <LoadingScreen visible={modalVisibility} transparent={true} />
         <View style={styles.header}>
-          <View style={styles.containerChild}>
-            <Image
-              style={styles.containerChildImage}
-              source={require("../../assets/club_logo.png")}
-            />
-          </View>
+          <Image
+            style={styles.containerChildImage}
+            source={require("../../assets/club_logo.png")}
+          />
         </View>
-        <View style={{ marginTop: 100 }}></View>
-        <View style={styles.inputBlock}>
+        <View style={[styles.inputBlock, { marginTop: 100 }]}>
           <TextInput
             keyboardType={"number-pad"}
             type={"custom"}
@@ -61,15 +56,18 @@ function Login({ navigation }) {
             label="Número do Titular ou CPF"
           />
         </View>
-        <View style={styles.inputBlock}>
+        <View style={[styles.inputBlock, { marginBottom: 5 }]}>
           <TextInput
             value={senha}
-            secureTextEntry={true}
+            secureTextEntry={secureText}
             onChangeText={(senha) => setSenha(senha)}
             label="Senha"
+            changePassEntry={() => {
+              setSecureText(!secureText);
+            }}
+            pass={true}
           />
         </View>
-        <View style={{ height: 5 }}></View>
 
         <DefaultButton
           onPress={async () => {
@@ -78,6 +76,7 @@ function Login({ navigation }) {
             if (result) {
               setNumTitulo("");
               setSenha("");
+              setSecureText(true);
               navigation.navigate("Home", {});
               setModalVisibility(false);
             } else {
@@ -96,9 +95,6 @@ function Login({ navigation }) {
           title={"ENTRAR"}
         />
         <Text style={styles.link}>Esqueceu a senha?</Text>
-
-        <View style={styles.register}></View>
-        <View style={{ height: 60 }}></View>
       </KeyboardAvoidingView>
     </>
   );
