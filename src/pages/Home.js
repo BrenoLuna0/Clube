@@ -210,7 +210,7 @@ function Home({ navigation }) {
               }}
             >
               <Icon name={"gear"} color="#F3F3F3" size={36} />
-              <Text style={stylesLocal.buttonText}> Sobre </Text>
+              <Text style={stylesLocal.buttonText}> Opções </Text>
             </TouchableOpacity>
           </Animated.View>
         </View>
