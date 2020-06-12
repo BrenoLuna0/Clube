@@ -206,15 +206,7 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                Alert.alert(
-                  "Alerta",
-                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
-                  [
-                    {
-                      text: "Ok",
-                    },
-                  ]
-                );
+                navigation.navigate("About", {});
               }}
             >
               <Icon name={"gear"} color="#F3F3F3" size={36} />

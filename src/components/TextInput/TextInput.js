@@ -38,14 +38,14 @@ function Component({
             {secureTextEntry ? (
               <Icon
                 name="eye-slash"
-                size={36}
+                size={30}
                 color={"#3B3F8C"}
                 onPress={changePassEntry}
               />
             ) : (
               <Icon
                 name="eye"
-                size={36}
+                size={30}
                 color={"#3B3F8C"}
                 onPress={changePassEntry}
               />

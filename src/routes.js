@@ -1,88 +1,105 @@
-import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { navigationRef } from './services/navigation'
+import React from "react";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { navigationRef } from "./services/navigation";
 
-import Login from '../src/pages/Login';
-import Register from '../src/pages/Register';
-import Home from '../src/pages/Home';
-import DatePicker from '../src/pages/DatePicker';
-import Guests2 from '../src/pages/Guests2';
-import Activities from '../src/pages/Activities';
-import Schedulles from '../src/pages/Schedulles';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import DatePicker from "./pages/DatePicker";
+import Guests2 from "./pages/Guests2";
+import Activities from "./pages/Activities";
+import Schedulles from "./pages/Schedulles";
+import About from "./pages/About";
 
 const AppContainer = createAppContainer(
-    createStackNavigator({
-        Login: {
-            screen: Login,
-            navigationOptions: {
-                title: '',
-                headerShown: false,
-            }
+  createStackNavigator({
+    Login: {
+      screen: Login,
+      navigationOptions: {
+        title: "",
+        headerShown: false,
+      },
+    },
+    Register: {
+      screen: Register,
+      navigationOptions: {
+        title: "",
+        headerShown: false,
+      },
+    },
+    Home: {
+      screen: Home,
+      navigationOptions: {
+        title: "",
+        headerShown: false,
+      },
+    },
+    DatePicker: {
+      screen: DatePicker,
+      navigationOptions: {
+        title: "",
+        headerBackTitleVisible: true,
+        headerBackTitle: "Voltar",
+        headerTintColor: "#F2EFEA",
+        headerStyle: {
+          backgroundColor: "#3B3F8C",
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
         },
-        Register: {
-            screen: Register,
-            navigationOptions: {
-                title: '',
-                headerShown: false
-            }
+      },
+    },
+    Guests2: {
+      screen: Guests2,
+      navigationOptions: {
+        title: "",
+        headerBackTitleVisible: true,
+        headerBackTitle: "Voltar",
+        headerTintColor: "#F2EFEA",
+        headerStyle: {
+          backgroundColor: "#3B3F8C",
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
         },
-        Home: {
-            screen: Home,
-            navigationOptions: {
-                title: '',
-                headerShown: false
-            }
+      },
+    },
+    Activities: {
+      screen: Activities,
+      navigationOptions: {
+        title: "",
+        headerShown: false,
+      },
+    },
+    Schedulles: {
+      screen: Schedulles,
+      navigationOptions: {
+        title: "",
+        headerShown: false,
+      },
+    },
+    About: {
+      screen: About,
+      navigationOptions: {
+        title: "",
+        headerBackTitleVisible: true,
+        headerBackTitle: "Voltar",
+        headerTintColor: "#F2EFEA",
+        headerStyle: {
+          backgroundColor: "#3B3F8C",
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
         },
-        DatePicker: {
-            screen: DatePicker,
-            navigationOptions: {
-                title: '',
-                headerBackTitleVisible : true,
-                headerBackTitle: 'Voltar',
-                headerTintColor : '#F2EFEA',
-                headerStyle: {
-                    backgroundColor: '#3B3F8C',
-                    elevation: 0,
-                    shadowOpacity: 0,
-                    borderBottomWidth: 0,
-                }
-            }
-        },
-        Guests2: {
-            screen: Guests2,
-            navigationOptions: {
-                title: '',
-                headerBackTitleVisible : true,
-                headerBackTitle: 'Voltar',
-                headerTintColor : '#F2EFEA',
-                headerStyle: {
-                    backgroundColor: '#3B3F8C',
-                    elevation: 0,
-                    shadowOpacity: 0,
-                    borderBottomWidth: 0,
-                }
-            }
-        },
-        Activities: {
-            screen: Activities,
-            navigationOptions: {
-                title: '',
-                headerShown: false
-            }
-        },
-        Schedulles: {
-            screen: Schedulles,
-            navigationOptions: {
-                title: '',
-                headerShown: false,
-
-            }
-        },
-    })
+      },
+    },
+  })
 );
 
-const Routes = () => { return <AppContainer ref={navigationRef} /> }
+const Routes = () => {
+  return <AppContainer ref={navigationRef} />;
+};
 
 export default Routes;
 
