@@ -5,7 +5,7 @@ import SquareButton from "../SquareButton/SquareButton";
 import moment from "moment";
 import styles from "./LineDates.style";
 
-function Component({ marginTop, dates }) {
+function Component({ marginTop, dates, navigation }) {
   return (
     <>
       <View style={[styles.container, { marginTop }]}>
@@ -14,10 +14,24 @@ function Component({ marginTop, dates }) {
         </View>
         <View style={[styles.box, { width: "80%" }]}>
           <ScrollView horizontal={true}>
-            {dates.map((date) => (
+            {dates.map((date, index) => (
               <SquareButton
-                text={moment(new Date(date.AGEN_DATA)).format("DD/MM")}
-                onPress={() => alert("AAAAAAA")}
+                key={index}
+                text={moment(new Date(date.AGEN_DATA))
+                  .add(1, "day")
+                  .format("DD/MM")}
+                onPress={() => {
+                  new Date(date.AGEN_DATA).getDay() == 0 ||
+                  new Date(date.AGEN_DATA).getDay() == 6
+                    ? navigation.navigate("Guests2", {
+                        limite: 1,
+                        data: moment(date.AGEN_DATA).add(1, "day"),
+                      })
+                    : navigation.navigate("Guests2", {
+                        limite: 2,
+                        data: moment(date.AGEN_DATA).add(1, "day"),
+                      });
+                }}
               />
             ))}
           </ScrollView>

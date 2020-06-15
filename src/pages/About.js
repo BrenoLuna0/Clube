@@ -41,15 +41,13 @@ function About({ navigation }) {
 
   return (
     <View style={styles.containerMaster}>
-      <View style={styles.header}>
-        <Image
-          style={styles.containerChildImage}
-          source={require("../../assets/club_logo.png")}
-        />
-      </View>
-      <LineInformation icon="user" text={name} marginTop={85} />
-      <LineInformation icon="address-book" text={titulo} marginTop={15} />
-      <LineDates marginTop={15} dates={dates} />
+      <LineInformation icon="user" text={name} marginTop={15} />
+      <LineInformation
+        icon="address-book"
+        text={`Título: ${titulo}`}
+        marginTop={15}
+      />
+      <LineDates marginTop={15} dates={dates} navigation={navigation} />
       <LogouButton
         onPress={() => {
           Alert.alert("Aviso!", "Deseja voltar para a tela de Login?", [

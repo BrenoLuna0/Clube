@@ -23,6 +23,8 @@ function Guests({ navigation }) {
   );
   const [limit, setLimit] = useState(navigation.state.params.limite);
   const [selectedBoxes, setSelectedBoxes] = useState(0);
+  const [update, setUpdate] = useState(false);
+  const [agenCodigo, setAgenCodigo] = useState(0);
 
   const dias = [
     "DOMINGO",
@@ -38,13 +40,40 @@ function Guests({ navigation }) {
     async function carregarConvidados() {
       const sociCodigo = await AsyncStorage.getItem("SOCI_CODIGO");
       const token = await AsyncStorage.getItem("token");
+      const convidados = await api
+        .get(`/convidado/${sociCodigo}/${moment(data).format("YYYY-MM-DD")}`, {
+          headers: { "x-access-token": token },
+        })
+        .then((response) => {
+          return response.data;
+        });
+
+      setSelectedBoxes(convidados.length);
       api
         .get(`/convidado/${sociCodigo}`, {
           headers: { "x-access-token": token },
         })
         .then(function (response) {
           setTableData(response.data);
-          setTableState(response.data.map(() => false));
+          if (convidados.length > 0) {
+            setUpdate(true);
+            setAgenCodigo(convidados[0].AGEN_CODIGO);
+            setTableState(
+              response.data.map((conv) => {
+                const verif = convidados.filter(
+                  (convidado) =>
+                    convidado.CONV_TITU_CODIGO == conv.CONV_TITU_CODIGO
+                );
+                if (verif.length === 0) {
+                  return false;
+                }
+                return true;
+              })
+            );
+          } else {
+            setTableState(response.data.map(() => false));
+          }
+
           setModalVisibility(false);
         })
         .catch(function (err) {
@@ -204,6 +233,67 @@ function Guests({ navigation }) {
       });
   };
 
+  const atualizarAgenda = async () => {
+    if (selectedBoxes == 0 || selectedBoxes == null) {
+      Alert.alert("Selecione as pessoas que deseja convidar para o Clube", "", [
+        {
+          text: "Ok",
+        },
+      ]);
+    } else {
+      setModalSaveVisibility(!modalSaveVisibility);
+      const convidados = tableData.filter((convidado, index) => {
+        if (tableState[index]) {
+          return convidado;
+        }
+      });
+      const sociCodigo = await AsyncStorage.getItem("SOCI_CODIGO");
+      const token = await AsyncStorage.getItem("token");
+      api
+        .put(
+          `/agenda/${agenCodigo}`,
+          {
+            convidados,
+            sociCodigo,
+          },
+          {
+            headers: { "x-access-token": token },
+          }
+        )
+        .then((response) => {
+          if (response.data) {
+            Alert.alert(
+              "Agendamento atualizado",
+              "Estamos esperando você e seus convidados neste dia!",
+              [
+                {
+                  text: "Ok",
+                  onPress: () => {
+                    navigation.navigate("Home", {});
+                  },
+                },
+              ],
+              { cancelable: false }
+            );
+            setModalSaveVisibility(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          Alert.alert(
+            "Houve um erro ao convidar os seus amigos, tente novamente mais tarde",
+            "",
+            [
+              {
+                text: "Ok",
+              },
+            ]
+          );
+          setModalSaveVisibility(false);
+        });
+    }
+  };
+
   return (
     <>
       <View style={styles.titleBar}>
@@ -249,7 +339,7 @@ function Guests({ navigation }) {
         <View style={styles.bottomButton}>
           <DefaultButton
             onPress={() => {
-              inserirAgenda();
+              update ? atualizarAgenda() : inserirAgenda();
             }}
             title="Salvar"
           />
