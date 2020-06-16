@@ -4,8 +4,8 @@ const IMAGE_HEIGHT = window.width / 2;
 
 export default StyleSheet.create({
   containerMaster: {
-    flex: 1,
     alignItems: "center",
+    justifyContent: "flex-end",
   },
   logo: {
     height: IMAGE_HEIGHT,

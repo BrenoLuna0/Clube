@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
 
   text: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "center",
     color: "#F2EFEA",
     fontWeight: "bold",
