@@ -3,6 +3,7 @@ import { View, Image, Alert, AsyncStorage } from "react-native";
 import LineInformation from "../components/LineInformation/LineInformation";
 import LogouButton from "../components/LogoutButton/LogoutButton";
 import LineDates from "../components/LineDates/LineDates";
+import LineButton from "../components/LineButton/LineButton";
 import { onSignOut } from "../services/auth";
 import api from "../services/api";
 import styles from "../styles/AboutStyle.style";
@@ -48,6 +49,13 @@ function About({ navigation }) {
         marginTop={15}
       />
       <LineDates marginTop={15} dates={dates} navigation={navigation} />
+      <LineButton
+        text={"Redefinir Senha"}
+        marginTop={15}
+        onPress={() => {
+          navigation.navigate("Password", {});
+        }}
+      />
       <LogouButton
         onPress={() => {
           Alert.alert("Aviso!", "Deseja voltar para a tela de Login?", [

@@ -124,7 +124,7 @@ function Home({ navigation }) {
 
   return (
     <>
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={[styles.safeArea, { marginTop: 15 }]}>
         <View style={styles.container}>
           <ScrollView
             style={styles.scrollview}
