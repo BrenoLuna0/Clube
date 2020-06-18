@@ -3,14 +3,13 @@ import {
   View,
   Text,
   Image,
-  StatusBar,
   KeyboardAvoidingView,
   Platform,
   Alert,
 } from "react-native";
 import { onSignIn } from "../services/auth";
 import styles from "../styles/Login.style";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { StatusBar } from "expo-status-bar";
 import TextInput from "../components/TextInput/TextInput";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import DefaultButton from "../components/DefaultButton/DefaultButton";
@@ -24,7 +23,7 @@ function Login({ navigation }) {
 
   return (
     <>
-      <StatusBar backgroundColor="#3B3F8C" barStyle="light-content" />
+      <StatusBar backgroundColor="#3B3F8C" style={"light"} />
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : null}
         style={{ flex: 1 }}

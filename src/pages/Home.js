@@ -31,7 +31,7 @@ function Home({ navigation }) {
   const [slider1ActiveSlide, setSlider1ActiveSlide] = useState(
     SLIDER_1_FIRST_ITEM
   );
-  const [usuario, setUsuario] = useState([]);
+  const [usuario, setUsuario] = useState(["", ""]);
 
   const backAction = () => {
     const isHome = getCurrentRoute() === "Home";
