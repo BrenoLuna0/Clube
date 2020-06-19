@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  Alert,
-  StatusBar,
-} from "react-native";
+import { View, Text, Image, Alert, StatusBar, ScrollView } from "react-native";
 import { onSignIn } from "../services/auth";
 import styles from "../styles/Login.style";
 import TextInput from "../components/TextInput/TextInput";
@@ -24,14 +16,7 @@ function Login({ navigation }) {
   return (
     <>
       <StatusBar backgroundColor="#3B3F8C" style={"light"} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : null}
-        style={{ flex: 1 }}
-        contentContainerStyle={{ width: "100%" }}
-        //enableOnAndroid={true}
-        //enableAutoAutomaticScroll={Platform.OS === "ios"}
-        //extraHeight={60}
-      >
+      <ScrollView>
         <View style={styles.containerMaster}>
           <LoadingScreen visible={modalVisibility} transparent={true} />
           <View style={styles.header}>
@@ -102,8 +87,9 @@ function Login({ navigation }) {
             title={"ENTRAR"}
           />
           <Text style={styles.link}>Esqueceu a senha?</Text>
+          <View style={{ flex: 1 }} />
         </View>
-      </KeyboardAvoidingView>
+      </ScrollView>
     </>
   );
 }

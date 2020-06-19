@@ -5,7 +5,7 @@
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
-    "version": "2.0.1",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,14 +19,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.Csm.Clube",
-      "buildNumber": "2.0.1"
+      "buildNumber": "2.0.2"
     },
     "android": {
       "package": "com.Csm.Clube",
-      "versionCode": 2,
+      "versionCode": 3,
       "splash": {
         "image": "./assets/splash.png",
-        "resizeMode": "native",
+        "resizeMode": "contain",
         "backgroundColor": "#FEFEFE"
       }
     },
