@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "api-5204880521799217164-39556",
+  "private_key_id": "568b70f141b59b896a6224827e6a84c6c71a9dc1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDYcX+1DLOHFVCF\nK8pq0UYOLEY5ygaVCqonbgJYLGAhdXA2sH6eRszqk5Ogo9iGVi0+0dM03R8ddkvx\nsBJGlkImP5Bj77giOZSJ590Dc5RogPaNgVMM9bnV/86INDKLMV1EA9lM7j3Nraq/\nkMzFHLn/1GW9ipqE5DKW8P+FVe6kZV2XNs713QeqQedyEoo1/AuiINeODwN/Dx1K\ntw/fTWzGAqdXrCB1YQmjoTc2QnJw+ZfdTxqVnpfW6rasrPb2e2EnvjDBtMu6x/Ih\nD24Ybo0zNHER+22G42a/nANjT2FsdM2YLCjwrbESqN0S3QqXXBjHTLM/e8YTXhbU\n42T6eNTxAgMBAAECggEAB3gHLaK2ETvBjw7fScdV8QhDFhxsFLmM/JZVu2Awowbv\n69s0S1brHE8iYYE16BDSN+A6txDIUZZy8XCfeNMXjkVUQLaVdozhHM8k98kFvoNw\nvppPWNuj4YgVwup2MgpuivnNBlQUSuQqx7iB8G1Y18SnDB7bzSkou7+uOZYpCYAr\nrb6jwB4uqDc5/CPw4StbLrSHoac+fd/1L3dpCGPHJYcfXK544oHs8RTa6Mu/WSVI\n7GhoWQrxNFuj31ZdcNZHUt3WksdKrAwhZIccjKrn9WhgI6/2m4omJWO/+0BZtBMm\nvAvYWeI3x16WMwYnm4bvRYc8LqjeCFKohP70Np/evwKBgQD70HM0Xjrt/+R7sLgk\njubIBBriyKwtH660+1FlJrdMiLhtAGX08OEQCmg2L96NeCIp3xfm/381Hd0QC2Cc\nzUeTCfQWL1dsqCuIHCMSMYpE9INMDVmXVEtu18qbu77HU+bsXI+JZOz7rsksCdsg\nZ2UDJCMBUoW8OO6tWlsHMR0KcwKBgQDcCojMJPhTsQ6OEdicp63RG/1tlyiF/Nen\n78ohmlO7ATUSddtNbEv3OHXZgFg39YsuouIL+OmlBgvex4hfdVxP8H3QeDsiXAsE\nPDh6CbScbfiuYNJAqUECp7PRYejnBfMLfYqUXrERlLwGqGiSUv7ciFV6skL+AJ5L\nWaa8lP6WCwKBgB3BQ9usRspYsmbrOtcXC64WzhZ+H9o1JC++gp+xM3eXsDMxGNsY\nm3+Ju0ar4WBWEbNg6TIifqWIIdcDgScGGq8FPhJhBbORK5Opv3sm32/GdL1H1o5L\nJ56xYP+F78Ud5OuJBGz3wAj9XkgV4g6yKP12B6zgU20qTQmu45K1+viBAoGAfhaD\nQQfGTJ7eykYrq8jh7ztsw0mk7PJv2UmsuAipBjWw5b0nR3xRI370+Qd0hcxsTvMD\nOP0PVYLbdnM8EAc+OIiEb9sVd6Dqpyii7Dt3hVP29mWA1ZCnMhBLGCZUwV1FYkY0\nDMUeDgb+n4oNMhvg8xokcUSI4ugTzPW4d8OhBvUCgYANJm7eXiK14YOUppkGkDFj\nx5IcSYklD1HRQ9knkmmG5INLE8HkLPxWWC2wrl5kOXJ95t8GKgKvo1MqMTrbIJpo\nvZm0gV+FlXeeBx8bEzGK9M6N444uzpqsvpaaUVQjJa5F41ThmCrN3WrybzyQC9E3\n/+apznjvfRSSNptUyxJ+iw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "clube-intermunicipal@api-5204880521799217164-39556.iam.gserviceaccount.com",
+  "client_id": "105513623977119163299",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/clube-intermunicipal%40api-5204880521799217164-39556.iam.gserviceaccount.com"
+}

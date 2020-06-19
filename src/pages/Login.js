@@ -6,10 +6,10 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  StatusBar,
 } from "react-native";
 import { onSignIn } from "../services/auth";
 import styles from "../styles/Login.style";
-import { StatusBar } from "expo-status-bar";
 import TextInput from "../components/TextInput/TextInput";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import DefaultButton from "../components/DefaultButton/DefaultButton";
