@@ -84,16 +84,42 @@ function Guests({ navigation }) {
   }, []);
 
   const carregarConvidados = async () => {
-    setSelectedBoxes(0);
     const sociCodigo = await AsyncStorage.getItem("SOCI_CODIGO");
     const token = await AsyncStorage.getItem("token");
+    const convidados = await api
+      .get(`/convidado/${sociCodigo}/${moment(data).format("YYYY-MM-DD")}`, {
+        headers: { "x-access-token": token },
+      })
+      .then((response) => {
+        return response.data;
+      });
+
+    setSelectedBoxes(convidados.length);
     api
       .get(`/convidado/${sociCodigo}`, {
         headers: { "x-access-token": token },
       })
       .then(function (response) {
         setTableData(response.data);
-        setTableState(response.data.map(() => false));
+        if (convidados.length > 0) {
+          setUpdate(true);
+          setAgenCodigo(convidados[0].AGEN_CODIGO);
+          setTableState(
+            response.data.map((conv) => {
+              const verif = convidados.filter(
+                (convidado) =>
+                  convidado.CONV_TITU_CODIGO == conv.CONV_TITU_CODIGO
+              );
+              if (verif.length === 0) {
+                return false;
+              }
+              return true;
+            })
+          );
+        } else {
+          setTableState(response.data.map(() => false));
+        }
+
         setModalVisibility(false);
       })
       .catch(function (err) {
