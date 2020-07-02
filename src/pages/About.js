@@ -58,7 +58,7 @@ function About({ navigation }) {
       />
       <LogouButton
         onPress={() => {
-          Alert.alert("Aviso!", "Deseja voltar para a tela de Login?", [
+          Alert.alert("Aviso!", "Deseja efetuar o logout?", [
             {
               text: "Cancelar",
               onPress: () => null,

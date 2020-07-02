@@ -63,31 +63,37 @@ function Login({ navigation }) {
 
           <DefaultButton
             onPress={async () => {
-              setModalVisibility(true);
-              const result = await onSignIn(numTitulo, senha);
-              if (result) {
-                setNumTitulo("");
-                setSenha("");
-                setSecureText(true);
-                navigation.navigate("Home", {});
-                setModalVisibility(false);
+              if (numTitulo === "" || senha === "") {
+                Alert.alert("Atenção", "Preencha os campos para fazer login", [
+                  {
+                    text: "Ok",
+                  },
+                ]);
               } else {
-                setModalVisibility(false);
-                Alert.alert(
-                  "Erro no Login",
-                  "Número do Titular/CPF ou Senha inválidos",
-                  [
-                    {
-                      text: "Ok",
-                    },
-                  ]
-                );
+                setModalVisibility(true);
+                const result = await onSignIn(numTitulo, senha);
+                if (result) {
+                  setNumTitulo("");
+                  setSenha("");
+                  setSecureText(true);
+                  navigation.navigate("Home", {});
+                  setModalVisibility(false);
+                } else {
+                  setModalVisibility(false);
+                  Alert.alert(
+                    "Atenção",
+                    "Número do Titular/CPF ou Senha inválidos",
+                    [
+                      {
+                        text: "Ok",
+                      },
+                    ]
+                  );
+                }
               }
             }}
             title={"ENTRAR"}
           />
-          <Text style={styles.link}>Esqueceu a senha?</Text>
-          <View style={{ flex: 1 }} />
         </View>
       </ScrollView>
     </>

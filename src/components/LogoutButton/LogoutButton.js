@@ -8,7 +8,7 @@ function Component({ onPress }) {
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={onPress}>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.text}>Sair </Text>
+          <Text style={styles.text}>Logout </Text>
           <Icon name="logout" size={29} color="#FFF" />
         </View>
       </TouchableOpacity>
