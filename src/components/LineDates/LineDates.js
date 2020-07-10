@@ -23,11 +23,11 @@ function Component({ marginTop, dates, navigation }) {
                 onPress={() => {
                   new Date(date.AGEN_DATA).getDay() == 0 ||
                   new Date(date.AGEN_DATA).getDay() == 6
-                    ? navigation.navigate("Guests2", {
+                    ? navigation.navigate("SelectedGuests", {
                         limite: 1,
                         data: moment(date.AGEN_DATA).add(1, "day"),
                       })
-                    : navigation.navigate("Guests2", {
+                    : navigation.navigate("SelectedGuests", {
                         limite: 2,
                         data: moment(date.AGEN_DATA).add(1, "day"),
                       });

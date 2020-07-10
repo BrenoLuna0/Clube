@@ -12,6 +12,7 @@ import Activities from "./pages/Activities";
 import Schedulles from "./pages/Schedulles";
 import About from "./pages/About";
 import Password from "./pages/Password";
+import SelectedGuests from "./pages/SelectedGuests";
 
 const AppContainer = createAppContainer(
   createStackNavigator({
@@ -53,6 +54,21 @@ const AppContainer = createAppContainer(
     },
     Guests2: {
       screen: Guests2,
+      navigationOptions: {
+        title: "",
+        headerBackTitleVisible: true,
+        headerBackTitle: "Voltar",
+        headerTintColor: "#F2EFEA",
+        headerStyle: {
+          backgroundColor: "#3B3F8C",
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
+      },
+    },
+    SelectedGuests: {
+      screen: SelectedGuests,
       navigationOptions: {
         title: "",
         headerBackTitleVisible: true,
