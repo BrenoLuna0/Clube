@@ -124,7 +124,7 @@ function Home({ navigation }) {
 
   return (
     <>
-      <SafeAreaView style={[styles.safeArea, { marginTop: 15 }]}>
+      <SafeAreaView style={[styles.safeArea, { marginTop: 0 }]}>
         <View style={styles.container}>
           <ScrollView
             style={styles.scrollview}
@@ -138,7 +138,7 @@ function Home({ navigation }) {
       <View style={stylesLocal.welcomeBar}>
         <View style={stylesLocal.welcomebarStyle}>
           <Text style={stylesLocal.text}>
-            BEM VINDO {usuario[0] + " " + usuario[usuario.length - 1]}
+            BEM VINDO(A) {usuario[0] + " " + usuario[usuario.length - 1]}
           </Text>
         </View>
       </View>
@@ -209,11 +209,21 @@ function Home({ navigation }) {
                 navigation.navigate("About", {});
               }}
             >
-              <Icon name={"gear"} color="#F3F3F3" size={36} />
-              <Text style={stylesLocal.buttonText}> Opções </Text>
+              <Icon name={"check-square-o"} color="#F3F3F3" size={36} />
+              <Text style={stylesLocal.buttonText}> Visitas Agendadas </Text>
             </TouchableOpacity>
           </Animated.View>
         </View>
+        <Animated.View style={[stylesLocal.lineButton, { bottom: slideAnim }]}>
+          <TouchableOpacity
+            style={stylesLocal.lineButton}
+            onPress={() => {
+              navigation.navigate("About", {});
+            }}
+          >
+            <Icon name={"gear"} color="#F3F3F3" size={36} />
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     </>
   );

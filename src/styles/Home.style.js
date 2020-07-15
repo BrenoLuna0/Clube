@@ -25,7 +25,7 @@ export default StyleSheet.create({
     position: "relative",
     width: "100%",
     alignContent: "center",
-    justifyContent: "center",
+    //justifyContent: "center",
   },
 
   input: {
@@ -44,7 +44,7 @@ export default StyleSheet.create({
 
   text: {
     fontSize: 16,
-    color: "#3B3F8C",
+    color: "#F3F3F3",
     fontWeight: "bold",
     marginLeft: 3,
     marginRight: 3,
@@ -52,6 +52,17 @@ export default StyleSheet.create({
 
   button: {
     //justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    backgroundColor: "#3B3F8C",
+    padding: 10,
+    borderRadius: 10,
+  },
+
+  buttonLine: {
+    flexDirection: "row",
+    justifyContent: "center",
     width: "100%",
     height: "100%",
     alignItems: "center",
@@ -75,16 +86,16 @@ export default StyleSheet.create({
     justifyContent: "center",
     height: 50,
     width: "100%",
+    marginTop: -25,
+    marginBottom: 10,
   },
 
   welcomebarStyle: {
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderStyle: "solid",
-    borderColor: "#3B3F8C",
-    borderRadius: 10,
+    backgroundColor: "#3B3F8C",
     height: "100%",
+    width: "100%",
   },
 
   actionMenuButtons: {
@@ -142,9 +153,22 @@ export default StyleSheet.create({
     borderBottomRightRadius: 15,
   },
 
+  lineButton: {
+    //flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#3B3F8C",
+    position: "absolute",
+    bottom: 0,
+    //right: 0,
+    width: "75%",
+    height: 50,
+    borderRadius: 15,
+  },
+
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 15,
     textAlign: "center",
     position: "absolute",
     bottom: 16,
