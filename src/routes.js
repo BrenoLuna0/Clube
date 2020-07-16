@@ -93,7 +93,15 @@ const AppContainer = createAppContainer(
       screen: Schedulles,
       navigationOptions: {
         title: "",
-        headerShown: false,
+        headerBackTitleVisible: true,
+        headerBackTitle: "Voltar",
+        headerTintColor: "#F2EFEA",
+        headerStyle: {
+          backgroundColor: "#3B3F8C",
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
       },
     },
     About: {

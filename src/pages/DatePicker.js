@@ -3,6 +3,7 @@ import { View, Text, Alert } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import DefaultButton from "../components/DefaultButton/DefaultButton";
 import styles from "../styles/DatePickerStyle.style";
+import holiday from "../services/holiday";
 
 function DatePicker({ navigation }) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -58,13 +59,15 @@ function DatePicker({ navigation }) {
                 ]);
               } else {
                 const data = new Date(selectedStartDate);
-                data.getDay() == 0 || data.getDay() == 6
+                data.getDay() == 0 ||
+                data.getDay() == 6 ||
+                holiday(selectedStartDate)
                   ? navigation.navigate("Guests2", {
-                      limite: 1,
+                      limite: 2,
                       data: selectedStartDate,
                     })
                   : navigation.navigate("Guests2", {
-                      limite: 2,
+                      limite: 4,
                       data: selectedStartDate,
                     });
               }

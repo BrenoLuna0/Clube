@@ -235,13 +235,14 @@ function Guests({ navigation }) {
               {
                 text: "Ok",
                 onPress: () => {
+                  setModalSaveVisibility(false);
                   navigation.navigate("Home", {});
                 },
               },
             ],
+
             { cancelable: false }
           );
-          setModalSaveVisibility(false);
         }
       })
       .catch((err) => {
@@ -349,8 +350,6 @@ function Guests({ navigation }) {
             setModalVisibility(value);
           }}
         />
-        <LoadingScreen visible={modalVisibility} transparent={true} />
-        <LoadingScreen visible={modalSaveVisibility} transparent={true} />
         <PlusButton
           onPress={() => {
             setModalVisible(!modalVisible);
@@ -371,6 +370,8 @@ function Guests({ navigation }) {
           />
         </View>
       </View>
+      <LoadingScreen visible={modalVisibility} transparent={true} />
+      <LoadingScreen visible={modalSaveVisibility} transparent={true} />
     </>
   );
 }

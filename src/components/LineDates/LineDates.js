@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import SquareButton from "../SquareButton/SquareButton";
 import moment from "moment";
 import styles from "./LineDates.style";
+import holiday from "../../services/holiday";
 
 function Component({ marginTop, dates, navigation }) {
   return (
@@ -22,13 +23,14 @@ function Component({ marginTop, dates, navigation }) {
                   .format("DD/MM")}
                 onPress={() => {
                   new Date(date.AGEN_DATA).getDay() == 0 ||
-                  new Date(date.AGEN_DATA).getDay() == 6
+                  new Date(date.AGEN_DATA).getDay() == 6 ||
+                  holiday(date.AGEN_DATA)
                     ? navigation.navigate("SelectedGuests", {
-                        limite: 1,
+                        limite: 2,
                         data: moment(date.AGEN_DATA).add(1, "day"),
                       })
                     : navigation.navigate("SelectedGuests", {
-                        limite: 2,
+                        limite: 4,
                         data: moment(date.AGEN_DATA).add(1, "day"),
                       });
                 }}

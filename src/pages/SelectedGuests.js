@@ -6,6 +6,7 @@ import styles from "../styles/SelectedGuests.style";
 import DefaultButton from "../components/DefaultButton/DefaultButton";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import TableScroll from "../components/TableScroll/TableScroll";
+import holiday from "../services/holiday";
 
 function SelectedGuests({ navigation }) {
   const title = "CONVIDADOS";
@@ -48,13 +49,13 @@ function SelectedGuests({ navigation }) {
         <View style={styles.bottomButton}>
           <DefaultButton
             onPress={() => {
-              data.getDay() == 0 || data.getDay() == 6
+              data.getDay() == 0 || data.getDay() == 6 || holiday(data)
                 ? navigation.navigate("Guests2", {
-                    limite: 1,
+                    limite: 2,
                     data: moment(data),
                   })
                 : navigation.navigate("Guests2", {
-                    limite: 2,
+                    limite: 4,
                     data: moment(data),
                   });
             }}

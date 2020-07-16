@@ -206,7 +206,7 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                navigation.navigate("About", {});
+                navigation.navigate("Schedulles", {});
               }}
             >
               <Icon name={"check-square-o"} color="#F3F3F3" size={36} />
