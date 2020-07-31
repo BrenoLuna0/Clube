@@ -216,7 +216,7 @@ function Home({ navigation }) {
         </View>
         <Animated.View style={[stylesLocal.lineButton, { bottom: slideAnim }]}>
           <TouchableOpacity
-            style={stylesLocal.lineButton}
+            style={stylesLocal.lineButtonInside}
             onPress={() => {
               navigation.navigate("About", {});
             }}

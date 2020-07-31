@@ -25,7 +25,9 @@ function Component({ navigation, data }) {
       }}
     >
       <View style={styles.dataContainer}>
-        <Text style={styles.dataText}>{date}</Text>
+        <Text style={styles.dataText}>
+          {moment(data.AGEN_DATA).add(1, "day").format("DD/MM")}
+        </Text>
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.infoTitle}>
@@ -39,7 +41,9 @@ function Component({ navigation, data }) {
             renderItem={({ item }) => {
               return (
                 <View style={styles.item}>
-                  <Text>{item.CONV_TITU_NOME.split(" ")[0]}</Text>
+                  <Text style={styles.itemText}>
+                    {item.CONV_TITU_NOME.split(" ")[0]}
+                  </Text>
                 </View>
               );
             }}

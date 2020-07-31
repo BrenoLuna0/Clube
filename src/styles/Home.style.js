@@ -25,6 +25,7 @@ export default StyleSheet.create({
     position: "relative",
     width: "100%",
     alignContent: "center",
+
     //justifyContent: "center",
   },
 
@@ -58,6 +59,15 @@ export default StyleSheet.create({
     backgroundColor: "#3B3F8C",
     padding: 10,
     borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 
   buttonLine: {
@@ -88,6 +98,15 @@ export default StyleSheet.create({
     width: "100%",
     marginTop: -25,
     marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+
+    elevation: 7,
   },
 
   welcomebarStyle: {
@@ -96,6 +115,15 @@ export default StyleSheet.create({
     backgroundColor: "#3B3F8C",
     height: "100%",
     width: "100%",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+
+    elevation: 7,
   },
 
   actionMenuButtons: {
@@ -115,6 +143,15 @@ export default StyleSheet.create({
     width: "48%",
     height: "48%",
     borderTopLeftRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 
   buttonTopRight: {
@@ -127,6 +164,15 @@ export default StyleSheet.create({
     width: "48%",
     height: "48%",
     borderTopRightRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 
   buttonBottomLeft: {
@@ -139,6 +185,15 @@ export default StyleSheet.create({
     width: "48%",
     height: "48%",
     borderBottomLeftRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 
   buttonBottomRight: {
@@ -151,6 +206,15 @@ export default StyleSheet.create({
     width: "48%",
     height: "48%",
     borderBottomRightRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 
   lineButton: {
@@ -162,8 +226,26 @@ export default StyleSheet.create({
     bottom: 0,
     //right: 0,
     width: "75%",
-    height: 50,
+    height: 40,
     borderRadius: 15,
+  },
+
+  lineButtonInside: {
+    //justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    backgroundColor: "#3B3F8C",
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 
   buttonText: {
