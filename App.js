@@ -1,6 +1,5 @@
-import React from 'react';
-import Routes from './src/routes';
-import { isSignedIn } from './src/services/auth';
+import React from "react";
+import Routes from "./src/routes";
 
 export default function App() {
   /*const [signed, setSigned] = useState(false);
@@ -24,8 +23,5 @@ export default function App() {
   const Layout = createRootNavigator(signed);
   
   return <Layout/>*/
-  return (
-    <Routes />
-  );
-
+  return <Routes />;
 }

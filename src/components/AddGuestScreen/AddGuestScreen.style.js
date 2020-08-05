@@ -6,9 +6,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "#F3F3F3",
     width: "100%",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "#3B3F8C",
   },
   inputBlock: {
     width: "90%",
@@ -28,5 +25,6 @@ export default StyleSheet.create({
     width: "100%",
     marginBottom: 15,
     marginLeft: 10,
+    color: "#0d0d0d",
   },
 });

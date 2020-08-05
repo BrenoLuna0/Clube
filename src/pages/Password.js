@@ -76,9 +76,7 @@ function About({ navigation }) {
         contentContainerStyle={{ width: "100%" }}
       >
         <View style={styles.containerMaster}>
-          <View
-            style={[styles.inputBlock, { marginBottom: 5, marginTop: 120 }]}
-          >
+          <View style={[styles.inputBlock, { marginBottom: 5, marginTop: 50 }]}>
             <TextInput
               value={oldPass}
               secureTextEntry={oldPassSecureText}

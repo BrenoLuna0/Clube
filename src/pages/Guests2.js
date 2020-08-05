@@ -18,10 +18,8 @@ function Guests({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(true);
   const [modalSaveVisibility, setModalSaveVisibility] = useState(false);
-  const [data, setData] = useState(
-    new Date(navigation.state.params.data.toString())
-  );
-  const [limit, setLimit] = useState(navigation.state.params.limite);
+  const data = new Date(navigation.state.params.data.toString());
+  const limit = navigation.state.params.limite;
   const [selectedBoxes, setSelectedBoxes] = useState(0);
   const [update, setUpdate] = useState(false);
   const [agenCodigo, setAgenCodigo] = useState(0);
@@ -253,10 +251,10 @@ function Guests({ navigation }) {
           [
             {
               text: "Ok",
+              onPress: setModalSaveVisibility(false),
             },
           ]
         );
-        setModalSaveVisibility(false);
       });
   };
 

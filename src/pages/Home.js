@@ -25,6 +25,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 function Home({ navigation }) {
   const slideAnim = useRef(new Animated.Value(-400)).current;
+  const bottonButtonAnim = useRef(new Animated.Value(-400)).current;
 
   const SLIDER_1_FIRST_ITEM = 1;
 
@@ -111,8 +112,25 @@ function Home({ navigation }) {
   );
 
   useEffect(() => {
+    if (navigation.state.params.warningPass === true) {
+      Alert.alert(
+        "AVISO",
+        "É recomendado que atualize a sua senha para garantir maior segurança",
+        [
+          {
+            text: "Ok",
+            onPress: () => navigation.navigate("About", {}),
+          },
+        ]
+      );
+    }
     Animated.timing(slideAnim, {
       toValue: 0,
+      duration: 2500,
+    }).start();
+
+    Animated.timing(bottonButtonAnim, {
+      toValue: 5,
       duration: 2500,
     }).start();
 
@@ -214,7 +232,9 @@ function Home({ navigation }) {
             </TouchableOpacity>
           </Animated.View>
         </View>
-        <Animated.View style={[stylesLocal.lineButton, { bottom: slideAnim }]}>
+        <Animated.View
+          style={[stylesLocal.lineButton, { bottom: bottonButtonAnim }]}
+        >
           <TouchableOpacity
             style={stylesLocal.lineButtonInside}
             onPress={() => {

@@ -45,7 +45,7 @@ export default StyleSheet.create({
 
   text: {
     fontSize: 16,
-    color: "#F3F3F3",
+    color: "#3B3F8C",
     fontWeight: "bold",
     marginLeft: 3,
     marginRight: 3,
@@ -112,7 +112,7 @@ export default StyleSheet.create({
   welcomebarStyle: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#3B3F8C",
+    backgroundColor: "#EEEEEE",
     height: "100%",
     width: "100%",
     shadowColor: "#000",
@@ -223,7 +223,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#3B3F8C",
     position: "absolute",
-    bottom: 0,
     //right: 0,
     width: "75%",
     height: 40,

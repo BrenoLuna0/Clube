@@ -37,6 +37,7 @@ export default StyleSheet.create({
   dataText: {
     color: "#3B3F8C",
     fontSize: 20,
+    fontWeight: "bold",
   },
   infoContainer: {
     backgroundColor: "#EEEEEE",

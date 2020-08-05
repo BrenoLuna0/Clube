@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Modal, View, Text, AsyncStorage, Alert } from "react-native";
+import {
+  Modal,
+  View,
+  Text,
+  AsyncStorage,
+  Alert,
+  ScrollView,
+} from "react-native";
 import api from "../../services/api";
 import DefaultButton from "../DefaultButton/DefaultButton";
 import CancelButton from "../CancelButton/CancelButton";
@@ -79,64 +86,66 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
   return (
     <Modal {...props}>
       <View style={styles.modalContainer}>
-        <View style={styles.inputBlock}>
-          <TextInput
-            onChangeText={(name) => setName(name)}
-            label="Nome do(a) Convidado(a)"
-          />
-        </View>
-        <View style={styles.inputBlock}>
-          <TextInput
-            keyboardType={"number-pad"}
-            type={"custom"}
-            options={{
-              mask: "999.999.999-99",
-            }}
-            value={cpf}
-            mask="999.999.999-99"
-            onChangeText={(text) => {
-              setCpf(text);
-              if (text == "" || text == null) {
-                setTipo("I");
-              } else {
-                setTipo("A");
-              }
-            }}
-            label="CPF"
-          />
-        </View>
-        <View
-          style={{
-            marginBottom: 15,
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <Text
+        <ScrollView>
+          <View style={styles.inputBlock}>
+            <TextInput
+              onChangeText={(name) => setName(name)}
+              label="Nome do(a) Convidado(a)"
+            />
+          </View>
+          <View style={styles.inputBlock}>
+            <TextInput
+              keyboardType={"number-pad"}
+              type={"custom"}
+              options={{
+                mask: "999.999.999-99",
+              }}
+              value={cpf}
+              mask="999.999.999-99"
+              onChangeText={(text) => {
+                setCpf(text);
+                if (text == "" || text == null) {
+                  setTipo("I");
+                } else {
+                  setTipo("A");
+                }
+              }}
+              label="CPF"
+            />
+          </View>
+          <View
             style={{
-              color: "#D91122",
-              fontSize: 13,
-              fontWeight: "bold",
-              paddingHorizontal: 6,
+              marginBottom: 15,
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
             }}
           >
-            Caso o(a) convidado(a) tenha menos de 12 anos, deixar campo CPF em
-            branco
-          </Text>
-        </View>
-        <View style={{ alignItems: "center" }}>
-          <DefaultButton
-            onPress={() => {
-              addGuest();
-              setCpf("");
-            }}
-            title={"Cadastrar Convidado(a)"}
-          />
-        </View>
-        <View style={{ marginTop: 20, alignItems: "center" }}>
-          <CancelButton onPress={closeModal} title={"Fechar"} />
-        </View>
+            <Text
+              style={{
+                color: "#D91122",
+                fontSize: 13,
+                fontWeight: "bold",
+                paddingHorizontal: 6,
+              }}
+            >
+              Caso o(a) convidado(a) tenha menos de 12 anos, deixar campo CPF em
+              branco
+            </Text>
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <DefaultButton
+              onPress={() => {
+                addGuest();
+                setCpf("");
+              }}
+              title={"Cadastrar Convidado(a)"}
+            />
+          </View>
+          <View style={{ marginTop: 20, alignItems: "center" }}>
+            <CancelButton onPress={closeModal} title={"Fechar"} />
+          </View>
+        </ScrollView>
       </View>
     </Modal>
   );

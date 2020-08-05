@@ -15,19 +15,10 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   header: {
-    backgroundColor: "#3B3F8C",
+    backgroundColor: "#F3F3F3",
     alignItems: "center",
     width: "100%",
-  },
-
-  containerChildImage: {
-    backgroundColor: "#F2EFEA",
-    justifyContent: "center",
-    borderRadius: 85,
-    width: 170,
-    height: 170,
-    marginTop: 10,
-    marginBottom: -85,
+    height: 350,
   },
 
   input: {
@@ -42,6 +33,7 @@ export default StyleSheet.create({
 
   inputBlock: {
     width: "80%",
+    marginTop: 10,
   },
 
   text: {
