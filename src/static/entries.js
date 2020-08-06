@@ -9,26 +9,21 @@ export const ENTRIES1 = [
   {
     //title: 'Beautiful and dramatic Antelope Canyon',
     //subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-    illustration: "https://i.ibb.co/b1cMJWL/pic1.png",
+    illustration: "https://i.ibb.co/982V5NX/banner01.png",
   },
   {
     //title: 'Earlier this morning, NYC',
     //subtitle: 'Lorem ipsum dolor sit amet',
-    illustration: "https://i.ibb.co/4FQ2nNK/pic3.png",
+    illustration: "https://i.ibb.co/tZ2VbmC/banner02.png",
   },
   {
     //title: 'White Pocket Sunset',
     //subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
-    illustration: "https://i.ibb.co/wWMtmfH/pic2.png",
+    illustration: "https://i.ibb.co/r2syS5d/banner03.png",
   },
   {
     //title: 'Acrocorinth, Greece',
     //subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-    illustration: "https://i.ibb.co/qMnBj8N/pic4.png",
-  },
-  {
-    //title: 'The lone tree, majestic landscape of New Zealand',
-    //subtitle: 'Lorem ipsum dolor sit amet',
-    illustration: "https://i.ibb.co/CmdZbSP/pic5.png",
+    illustration: "https://i.ibb.co/Lh075Ln/banner04.png",
   },
 ];

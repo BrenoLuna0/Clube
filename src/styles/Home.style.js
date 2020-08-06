@@ -25,6 +25,7 @@ export default StyleSheet.create({
     position: "relative",
     width: "100%",
     alignContent: "center",
+    justifyContent: "center",
 
     //justifyContent: "center",
   },
@@ -45,7 +46,7 @@ export default StyleSheet.create({
 
   text: {
     fontSize: 16,
-    color: "#3B3F8C",
+    color: "#444444",
     fontWeight: "bold",
     marginLeft: 3,
     marginRight: 3,
@@ -96,8 +97,8 @@ export default StyleSheet.create({
     justifyContent: "center",
     height: 50,
     width: "100%",
-    marginTop: -25,
-    marginBottom: 10,
+    //marginTop: -25,
+    //marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

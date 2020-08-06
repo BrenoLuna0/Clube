@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    height: 100,
+    backgroundColor: "#EEEEEE",
+    height: 65,
     width: "100%",
-    flexDirection: "row",
-    marginVertical: 10,
+    marginTop: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -15,6 +15,7 @@ export default StyleSheet.create({
     shadowRadius: 2.62,
 
     elevation: 4,
+    padding: 7,
   },
   dataContainer: {
     backgroundColor: "#EEEEEE",
@@ -66,7 +67,6 @@ export default StyleSheet.create({
   infoTitleText: {
     color: "#444444",
     fontSize: 16,
-    fontWeight: "bold",
   },
   infoGrid: {
     width: "95%",
@@ -85,6 +85,7 @@ export default StyleSheet.create({
   },
   itemText: {
     fontSize: 12,
-    color: "#535467",
+    color: "#777777",
+    marginTop: 10,
   },
 });

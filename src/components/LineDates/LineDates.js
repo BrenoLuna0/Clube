@@ -11,7 +11,7 @@ function Component({ marginTop, dates, navigation }) {
     <>
       <View style={[styles.container, { marginTop }]}>
         <View style={[styles.box, { width: "20%" }]}>
-          <Icon name="calendar" size={28} color="#3B3F8C" />
+          <Icon name="calendar" size={28} color="#444444" />
         </View>
         <View style={[styles.box, { width: "80%" }]}>
           <ScrollView horizontal={true}>

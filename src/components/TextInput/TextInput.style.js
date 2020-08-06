@@ -12,7 +12,7 @@ export default StyleSheet.create({
     fontSize: 20,
     height: 56,
     paddingHorizontal: 12,
-    color: "#3a3a3a",
+    color: "#333333",
   },
   label: {
     position: "absolute",

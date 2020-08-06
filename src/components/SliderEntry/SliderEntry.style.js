@@ -39,7 +39,7 @@ export default StyleSheet.create({
     borderRadius: entryBorderRadius,
   },
   imageContainer: {
-    backgroundColor: "#3B3F8C",
+    backgroundColor: "#F3F3F3",
     height: slideHeight,
     marginBottom: IS_IOS ? 0 : -1, // Prevent a random Android rendering issue
     //zIndex: 100,

@@ -168,7 +168,7 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                Alert.alert(
+                /*Alert.alert(
                   "Alerta",
                   "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
                   [
@@ -176,11 +176,12 @@ function Home({ navigation }) {
                       text: "Ok",
                     },
                   ]
-                );
+                );*/
+                navigation.navigate("Inbox", {});
               }}
             >
-              <Icon name="users" color="#F3F3F3" size={36} />
-              <Text style={stylesLocal.buttonText}> Dependentes </Text>
+              <Icon name="envelope-o" color="#F3F3F3" size={36} />
+              <Text style={stylesLocal.buttonText}> Mensagens </Text>
             </TouchableOpacity>
           </Animated.View>
           <Animated.View
@@ -202,20 +203,11 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                //navigation.navigate("Activities", {});
-                Alert.alert(
-                  "Alerta",
-                  "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
-                  [
-                    {
-                      text: "Ok",
-                    },
-                  ]
-                );
+                navigation.navigate("About", {});
               }}
             >
-              <Icon name={"clock-o"} color="#F3F3F3" size={36} />
-              <Text style={stylesLocal.buttonText}> Horário </Text>
+              <Icon name={"gear"} color="#F3F3F3" size={36} />
+              <Text style={stylesLocal.buttonText}> Configurações </Text>
             </TouchableOpacity>
           </Animated.View>
           <Animated.View
@@ -232,18 +224,6 @@ function Home({ navigation }) {
             </TouchableOpacity>
           </Animated.View>
         </View>
-        <Animated.View
-          style={[stylesLocal.lineButton, { bottom: bottonButtonAnim }]}
-        >
-          <TouchableOpacity
-            style={stylesLocal.lineButtonInside}
-            onPress={() => {
-              navigation.navigate("About", {});
-            }}
-          >
-            <Icon name={"gear"} color="#F3F3F3" size={36} />
-          </TouchableOpacity>
-        </Animated.View>
       </View>
     </>
   );
