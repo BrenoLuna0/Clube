@@ -12,6 +12,7 @@ import DefaultButton from "../DefaultButton/DefaultButton";
 import CancelButton from "../CancelButton/CancelButton";
 import TextInput from "../TextInput/TextInput";
 import styles from "./AddGuestScreen.style";
+import { validate } from "gerador-validador-cpf";
 
 function Component({ finish, closeModal, loadingScreen, ...props }) {
   const [name, setName] = useState("");
@@ -21,6 +22,12 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
   const addGuest = async () => {
     if (name === "") {
       Alert.alert("Campo de nome é obrigatório", "", [
+        {
+          text: "Ok",
+        },
+      ]);
+    } else if (cpf.length < 11 || !validate(cpf)) {
+      Alert.alert("CPF inválido!", "", [
         {
           text: "Ok",
         },

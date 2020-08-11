@@ -99,7 +99,6 @@ function Login({ navigation }) {
               const result = await onSignIn(numTitulo, senha);
               if (result) {
                 setSecureText(true);
-                console.log(senha);
                 senha === "taliberado"
                   ? navigation.navigate("Home", { warningPass: true })
                   : navigation.navigate("Home", {});

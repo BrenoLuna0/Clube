@@ -11,18 +11,23 @@ import PlusButton from "../components/PlusButton/PlusButton";
 
 function Guests({ navigation }) {
   const [title, setTitle] = useState(
-    'Marque os convidados da sua lista de amigos que deseja chamar. Para Adicionar novos convidados na lista utilize o botão "+"'
+    'Marque os amigos da sua lista que deseja convidar. Para adicionar novos amigos na lista utilize o botão "+"'
   );
   const [tableData, setTableData] = useState([]);
   const [tableState, setTableState] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(true);
   const [modalSaveVisibility, setModalSaveVisibility] = useState(false);
+  const [trigger, setTrigger] = useState(false);
   const data = new Date(navigation.state.params.data.toString());
   const limit = navigation.state.params.limite;
   const [selectedBoxes, setSelectedBoxes] = useState(0);
   const [update, setUpdate] = useState(false);
   const [agenCodigo, setAgenCodigo] = useState(0);
+
+  /*const setTablelalal = ()=>{
+    setTableData(tableData=>({...tableData, [id] : undefined}))
+  }*/
 
   const dias = [
     "DOMINGO",
@@ -79,7 +84,7 @@ function Guests({ navigation }) {
         });
     }
     carregarConvidados();
-  }, []);
+  }, [trigger]);
 
   const carregarConvidados = async () => {
     const sociCodigo = await AsyncStorage.getItem("SOCI_CODIGO");
@@ -319,6 +324,39 @@ function Guests({ navigation }) {
     }
   };
 
+  const handleDelete = async (convCodigo) => {
+    setTableData((tableData) =>
+      tableData.filter((item) => item.CONV_TITU_CODIGO !== convCodigo)
+    );
+    const index = tableData.findIndex(
+      (convidado) => convidado.CONV_TITU_CODIGO === convCodigo
+    );
+    if (tableState[index]) {
+      handleCheckboxClick(index);
+    }
+    const token = await AsyncStorage.getItem("token");
+    //setModalVisibility(true);
+    await api
+      .delete(`/convidado/${convCodigo}`, {
+        headers: { "x-access-token": token },
+      })
+      .then(() => setTrigger(!trigger));
+  };
+
+  const handleDeleteClick = async (convCodigo) => {
+    Alert.alert(
+      "Atenção!",
+      "Tem certeza que deseja excluir este convidado da sua lista?",
+      [
+        {
+          text: "Sim",
+          onPress: () => handleDelete(convCodigo),
+        },
+        { text: "Não" },
+      ]
+    );
+  };
+
   return (
     <>
       <View style={styles.titleBar}>
@@ -358,6 +396,7 @@ function Guests({ navigation }) {
           tableData={tableData}
           tableState={tableState}
           handleCheckboxClick={handleCheckboxClick}
+          handleDeleteClick={handleDeleteClick}
         />
         <View style={styles.bottomButton}>
           <DefaultButton

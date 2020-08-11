@@ -45,8 +45,9 @@ const AppContainer = createAppContainer(
     Guests2: {
       screen: Guests2,
       navigationOptions: {
-        title: "",
+        title: "Lista de Amigos",
         headerTintColor: "#F2EFEA",
+        headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: "#3B3F8C",
           elevation: 0,
@@ -60,6 +61,7 @@ const AppContainer = createAppContainer(
       navigationOptions: {
         title: "",
         headerTintColor: "#F2EFEA",
+        headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: "#3B3F8C",
           elevation: 0,

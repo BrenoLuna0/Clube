@@ -45,6 +45,7 @@ function SelectedGuests({ navigation }) {
           tableData={tableData}
           tableState={tableState}
           handleCheckboxClick={() => {}}
+          handleDeleteClick={() => {}}
         />
         <View style={styles.bottomButton}>
           <DefaultButton
