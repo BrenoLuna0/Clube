@@ -35,6 +35,7 @@ function Inbox({ navigation }) {
 
   useEffect(() => {
     const loadMessages = async () => {
+      setModalVisible(true);
       const tituCodigo = await AsyncStorage.getItem("TITU_CODIGO");
       const token = await AsyncStorage.getItem("token");
       await api
@@ -82,10 +83,11 @@ function Inbox({ navigation }) {
             ]
           );
         });
+
+      setModalVisible(false);
     };
-    setModalVisible(true);
+
     loadMessages();
-    setModalVisible(false);
   }, [trigger]);
 
   return (

@@ -4,6 +4,7 @@ import CalendarPicker from "react-native-calendar-picker";
 import DefaultButton from "../components/DefaultButton/DefaultButton";
 import styles from "../styles/DatePickerStyle.style";
 import holiday from "../services/holiday";
+import moment from "moment";
 
 function DatePicker({ navigation }) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -51,8 +52,12 @@ function DatePicker({ navigation }) {
         <View style={styles.login}>
           <DefaultButton
             onPress={() => {
-              if (selectedStartDate == null) {
-                Alert.alert("Selecione uma Data!", "", [
+              if (
+                selectedStartDate == null ||
+                moment(new Date()).subtract(1, "day").toDate() >
+                  new Date(selectedStartDate)
+              ) {
+                Alert.alert("Selecione uma data válida!", "", [
                   {
                     text: "Ok",
                   },

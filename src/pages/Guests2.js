@@ -84,33 +84,6 @@ function Guests({ navigation }) {
         });
     }
     carregarConvidados();
-    /*async function loadGuests() {
-      const sociCodigo = await AsyncStorage.getItem("SOCI_CODIGO");
-      const token = await AsyncStorage.getItem("token");
-      await api
-        .get(`/convidado/${sociCodigo}/${moment(data).format("YYYY-MM-DD")}`, {
-          headers: { "x-access-token": token },
-        })
-        .then((response) => {
-          setTableData(response.data);
-          setTableState(
-            response.data.map((guest) => {
-              if (
-                moment(guest.AGEN_DATA).format("DD/MM/YYYY") ===
-                moment(data).format("DD/MM/YYYY")
-              ) {
-                setUpdate(true);
-                setAgenCodigo(guest.AGEN_CODIGO);
-                return true;
-              } else {
-                return false;
-              }
-            })
-          );
-          setModalVisibility(false);
-        });
-    }
-    loadGuests();*/
   }, [trigger]);
 
   const handleCheckboxClick = (checkBox) => {
