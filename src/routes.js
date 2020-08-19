@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Password from "./pages/Password";
 import SelectedGuests from "./pages/SelectedGuests";
 import Inbox from "./pages/Inbox";
+import Message from "./pages/Message";
 
 const AppContainer = createAppContainer(
   createStackNavigator({
@@ -116,6 +117,20 @@ const AppContainer = createAppContainer(
       screen: Inbox,
       navigationOptions: {
         title: "Caixa de Entrada",
+        headerTintColor: "#F2EFEA",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "#3B3F8C",
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
+      },
+    },
+    Message: {
+      screen: Message,
+      navigationOptions: {
+        title: "Mensagem",
         headerTintColor: "#F2EFEA",
         headerTitleAlign: "center",
         headerStyle: {

@@ -16,17 +16,17 @@ function Component({ navigation, data }) {
         holiday(data.AGEN_DATA)
           ? navigation.navigate("SelectedGuests", {
               limite: 2,
-              data: moment(data.AGEN_DATA),
+              data: moment(data.AGEN_DATA).add(1, "day"),
             })
           : navigation.navigate("SelectedGuests", {
               limite: 4,
-              data: moment(data.AGEN_DATA),
+              data: moment(data.AGEN_DATA).add(1, "day"),
             });
       }}
     >
       <View style={styles.dataContainer}>
         <Text style={styles.dataText}>
-          {moment(data.AGEN_DATA).format("DD/MM")}
+          {moment(data.AGEN_DATA).add(1, "day").format("DD/MM")}
         </Text>
       </View>
       <View style={styles.infoContainer}>

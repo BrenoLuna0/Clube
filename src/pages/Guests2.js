@@ -11,7 +11,7 @@ import PlusButton from "../components/PlusButton/PlusButton";
 
 function Guests({ navigation }) {
   const [title, setTitle] = useState(
-    'Marque os amigos da sua lista que deseja convidar. Para adicionar novos amigos na lista utilize o botão "+"'
+    'Adicione amigos na sua lista com o botão "+"'
   );
   const [tableData, setTableData] = useState([]);
   const [tableState, setTableState] = useState([]);
@@ -84,51 +84,34 @@ function Guests({ navigation }) {
         });
     }
     carregarConvidados();
-  }, [trigger]);
-
-  const carregarConvidados = async () => {
-    const sociCodigo = await AsyncStorage.getItem("SOCI_CODIGO");
-    const token = await AsyncStorage.getItem("token");
-    const convidados = await api
-      .get(`/convidado/${sociCodigo}/${moment(data).format("YYYY-MM-DD")}`, {
-        headers: { "x-access-token": token },
-      })
-      .then((response) => {
-        return response.data;
-      });
-
-    setSelectedBoxes(convidados.length);
-    api
-      .get(`/convidado/${sociCodigo}`, {
-        headers: { "x-access-token": token },
-      })
-      .then(function (response) {
-        setTableData(response.data);
-        if (convidados.length > 0) {
-          setUpdate(true);
-          setAgenCodigo(convidados[0].AGEN_CODIGO);
+    /*async function loadGuests() {
+      const sociCodigo = await AsyncStorage.getItem("SOCI_CODIGO");
+      const token = await AsyncStorage.getItem("token");
+      await api
+        .get(`/convidado/${sociCodigo}/${moment(data).format("YYYY-MM-DD")}`, {
+          headers: { "x-access-token": token },
+        })
+        .then((response) => {
+          setTableData(response.data);
           setTableState(
-            response.data.map((conv) => {
-              const verif = convidados.filter(
-                (convidado) =>
-                  convidado.CONV_TITU_CODIGO == conv.CONV_TITU_CODIGO
-              );
-              if (verif.length === 0) {
+            response.data.map((guest) => {
+              if (
+                moment(guest.AGEN_DATA).format("DD/MM/YYYY") ===
+                moment(data).format("DD/MM/YYYY")
+              ) {
+                setUpdate(true);
+                setAgenCodigo(guest.AGEN_CODIGO);
+                return true;
+              } else {
                 return false;
               }
-              return true;
             })
           );
-        } else {
-          setTableState(response.data.map(() => false));
-        }
-
-        setModalVisibility(false);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  };
+          setModalVisibility(false);
+        });
+    }
+    loadGuests();*/
+  }, [trigger]);
 
   const handleCheckboxClick = (checkBox) => {
     setTableState((state) =>
@@ -362,6 +345,9 @@ function Guests({ navigation }) {
       <View style={styles.titleBar}>
         <View style={styles.titleBarStyles}>
           <Text style={styles.text}>{title}</Text>
+          <Text style={styles.text}>
+            Data Selecionada: {moment(data).format("DD/MM/YYYY")}
+          </Text>
         </View>
       </View>
       <View style={{ flex: 1, alignItems: "center", position: "relative" }}>
@@ -370,16 +356,12 @@ function Guests({ navigation }) {
           transparent={true}
           visible={modalVisible}
           finish={() => {
-            carregarConvidados();
-            setTitle(
-              'Marque os convidados da sua lista de amigos que deseja chamar. Para Adicionar novos convidados na lista utilize o botão "+"'
-            );
+            setTrigger(!trigger);
+            setTitle('Adicione amigos na sua lista com o botão "+"');
             setModalVisible(!modalVisible);
           }}
           closeModal={() => {
-            setTitle(
-              'Marque os convidados da sua lista de amigos que deseja chamar. Para Adicionar novos convidados na lista utilize o botão "+"'
-            );
+            setTitle('Adicione amigos na sua lista com o botão "+"');
             setModalVisible(!modalVisible);
           }}
           loadingScreen={(value) => {

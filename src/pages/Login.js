@@ -100,8 +100,11 @@ function Login({ navigation }) {
               if (result) {
                 setSecureText(true);
                 senha === "taliberado"
-                  ? navigation.navigate("Home", { warningPass: true })
-                  : navigation.navigate("Home", {});
+                  ? navigation.navigate("Home", {
+                      warningPass: true,
+                      messageCount: result,
+                    })
+                  : navigation.navigate("Home", { messageCount: result });
                 setModalVisibility(false);
                 setNumTitulo("");
                 setSenha("");

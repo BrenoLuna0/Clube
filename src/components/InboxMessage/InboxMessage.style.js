@@ -16,6 +16,7 @@ export default StyleSheet.create({
 
     elevation: 4,
     padding: 7,
+    marginBottom: 8,
   },
   dataContainer: {
     backgroundColor: "#EEEEEE",

@@ -25,7 +25,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 function Home({ navigation }) {
   const slideAnim = useRef(new Animated.Value(-400)).current;
-  const bottonButtonAnim = useRef(new Animated.Value(-400)).current;
 
   const SLIDER_1_FIRST_ITEM = 1;
 
@@ -123,14 +122,16 @@ function Home({ navigation }) {
           },
         ]
       );
+    } else if (navigation.state.params.messageCount > 0) {
+      Alert.alert("AVISO", "Você possui novas mensagens", [
+        {
+          text: "Ok",
+          onPress: () => navigation.navigate("Inbox", {}),
+        },
+      ]);
     }
     Animated.timing(slideAnim, {
       toValue: 0,
-      duration: 2500,
-    }).start();
-
-    Animated.timing(bottonButtonAnim, {
-      toValue: 5,
       duration: 2500,
     }).start();
 
@@ -168,7 +169,7 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                Alert.alert(
+                /*Alert.alert(
                   "Alerta",
                   "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
                   [
@@ -176,8 +177,8 @@ function Home({ navigation }) {
                       text: "Ok",
                     },
                   ]
-                );
-                //navigation.navigate("Inbox", {});
+                );*/
+                navigation.navigate("Inbox", {});
               }}
             >
               <Icon name="envelope-o" color="#F3F3F3" size={36} />

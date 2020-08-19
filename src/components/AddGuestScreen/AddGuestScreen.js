@@ -19,64 +19,27 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
   const [cpf, setCpf] = useState("");
   const [tipo, setTipo] = useState("I");
 
-  const addGuest = async () => {
-    if (name === "") {
-      Alert.alert("Campo de nome é obrigatório", "", [
+  const addGuestApi = async () => {
+    closeModal();
+    loadingScreen(true);
+    const token = await AsyncStorage.getItem("token");
+    api
+      .post(
+        "/convidado",
         {
-          text: "Ok",
+          nome: name.toUpperCase(),
+          socio: await AsyncStorage.getItem("SOCI_CODIGO"),
+          tipo,
+          cpf,
         },
-      ]);
-    } else if (cpf.length < 11 || !validate(cpf)) {
-      Alert.alert("CPF inválido!", "", [
         {
-          text: "Ok",
-        },
-      ]);
-    } else {
-      closeModal();
-      loadingScreen(true);
-      const token = await AsyncStorage.getItem("token");
-      api
-        .post(
-          "/convidado",
-          {
-            nome: name.toUpperCase(),
-            socio: await AsyncStorage.getItem("SOCI_CODIGO"),
-            tipo,
-            cpf,
-          },
-          {
-            headers: { "x-access-token": token },
-          }
-        )
-        .then(function (response) {
-          if (!response.data) {
-            closeModal();
-            loadingScreen(false);
-            Alert.alert(
-              "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde",
-              "",
-              [
-                {
-                  text: "Ok",
-                },
-              ]
-            );
-          } else if (response.data == 1) {
-            closeModal();
-            loadingScreen(false);
-            Alert.alert("Este convidado já está na sua lista", "", [
-              {
-                text: "Ok",
-              },
-            ]);
-          } else {
-            finish();
-          }
-        })
-        .catch(function (err) {
-          console.log(err);
+          headers: { "x-access-token": token },
+        }
+      )
+      .then(function (response) {
+        if (!response.data) {
           closeModal();
+          loadingScreen(false);
           Alert.alert(
             "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde",
             "",
@@ -86,7 +49,55 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
               },
             ]
           );
-        });
+        } else if (response.data == 1) {
+          closeModal();
+          loadingScreen(false);
+          Alert.alert("Este convidado já está na sua lista", "", [
+            {
+              text: "Ok",
+            },
+          ]);
+        } else {
+          finish();
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        closeModal();
+        Alert.alert(
+          "Não foi possível adicionar o convidado no momento. Tente novamente mais tarde",
+          "",
+          [
+            {
+              text: "Ok",
+            },
+          ]
+        );
+      });
+  };
+
+  const addGuest = async () => {
+    if (name === "") {
+      Alert.alert("Campo de nome é obrigatório", "", [
+        {
+          text: "Ok",
+        },
+      ]);
+      return;
+    }
+
+    if (cpf.length > 0) {
+      if (cpf.length < 11 || !validate(cpf)) {
+        Alert.alert("CPF inválido!", "", [
+          {
+            text: "Ok",
+          },
+        ]);
+      } else {
+        addGuestApi();
+      }
+    } else {
+      addGuestApi();
     }
   };
 
@@ -96,6 +107,7 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
         <ScrollView>
           <View style={styles.inputBlock}>
             <TextInput
+              value={name}
               onChangeText={(name) => setName(name)}
               label="Nome do(a) Convidado(a)"
             />
@@ -145,6 +157,7 @@ function Component({ finish, closeModal, loadingScreen, ...props }) {
               onPress={() => {
                 addGuest();
                 setCpf("");
+                setName("");
               }}
               title={"Cadastrar Convidado(a)"}
             />

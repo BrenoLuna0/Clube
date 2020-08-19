@@ -18,18 +18,20 @@ function Component({ marginTop, dates, navigation }) {
             {dates.map((date, index) => (
               <SquareButton
                 key={index}
-                text={moment(new Date(date.AGEN_DATA)).format("DD/MM")}
+                text={moment(new Date(date.AGEN_DATA))
+                  .add(1, "day")
+                  .format("DD/MM")}
                 onPress={() => {
                   new Date(date.AGEN_DATA).getDay() == 0 ||
                   new Date(date.AGEN_DATA).getDay() == 6 ||
                   holiday(date.AGEN_DATA)
                     ? navigation.navigate("SelectedGuests", {
                         limite: 2,
-                        data: moment(date.AGEN_DATA),
+                        data: moment(date.AGEN_DATA).add(1, "day"),
                       })
                     : navigation.navigate("SelectedGuests", {
                         limite: 4,
-                        data: moment(date.AGEN_DATA),
+                        data: moment(date.AGEN_DATA).add(1, "day"),
                       });
                 }}
               />
