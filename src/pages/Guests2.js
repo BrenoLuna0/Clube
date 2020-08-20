@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, AsyncStorage, Alert } from "react-native";
+import { View, Text, AsyncStorage, Alert, Button } from "react-native";
 import moment from "moment";
 import api from "../services/api";
 import styles from "../styles/Guests.style";
@@ -7,7 +7,6 @@ import DefaultButton from "../components/DefaultButton/DefaultButton";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import AddGuestScreen from "../components/AddGuestScreen/AddGuestScreen";
 import TableScroll from "../components/TableScroll/TableScroll";
-import PlusButton from "../components/PlusButton/PlusButton";
 
 function Guests({ navigation }) {
   const [title, setTitle] = useState(
@@ -84,6 +83,7 @@ function Guests({ navigation }) {
         });
     }
     carregarConvidados();
+    navigation.setParams({ showModal });
   }, [trigger]);
 
   const handleCheckboxClick = (checkBox) => {
@@ -313,6 +313,11 @@ function Guests({ navigation }) {
     );
   };
 
+  const showModal = () => {
+    setModalVisible(!modalVisible);
+    setTitle("Adicione um amigo na sua lista");
+  };
+
   return (
     <>
       <View style={styles.titleBar}>
@@ -339,12 +344,6 @@ function Guests({ navigation }) {
           }}
           loadingScreen={(value) => {
             setModalVisibility(value);
-          }}
-        />
-        <PlusButton
-          onPress={() => {
-            setModalVisible(!modalVisible);
-            setTitle("Adicione um amigo na sua lista");
           }}
         />
         <TableScroll

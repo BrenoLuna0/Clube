@@ -7,7 +7,7 @@ function Component({ onPress }) {
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Icon name="plus" color="#F3F3F3" size={20} />
+        <Icon name="plus" color="#3B3F8C" size={25} />
       </TouchableOpacity>
     </View>
   );

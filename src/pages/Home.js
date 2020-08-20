@@ -169,7 +169,7 @@ function Home({ navigation }) {
             <TouchableOpacity
               style={stylesLocal.button}
               onPress={() => {
-                /*Alert.alert(
+                Alert.alert(
                   "Alerta",
                   "Ainda não temos essa funcionalidade no momento. Espere por novas Atualizações",
                   [
@@ -177,8 +177,8 @@ function Home({ navigation }) {
                       text: "Ok",
                     },
                   ]
-                );*/
-                navigation.navigate("Inbox", {});
+                );
+                //navigation.navigate("Inbox", {});
               }}
             >
               <Icon name="envelope-o" color="#F3F3F3" size={36} />

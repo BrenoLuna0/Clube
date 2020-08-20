@@ -1,7 +1,10 @@
 import React from "react";
+//import { Text } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { navigationRef } from "./services/navigation";
+
+import PlusButton from "./components/PlusButton/PlusButton";
 
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -45,16 +48,21 @@ const AppContainer = createAppContainer(
     },
     Guests2: {
       screen: Guests2,
-      navigationOptions: {
-        title: "Lista de Amigos",
-        headerTintColor: "#F2EFEA",
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#3B3F8C",
-          elevation: 0,
-          shadowOpacity: 0,
-          borderBottomWidth: 0,
-        },
+      navigationOptions: ({ navigation }) => {
+        return {
+          title: "Lista de Amigos",
+          headerTintColor: "#F2EFEA",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: "#3B3F8C",
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerRight: () => (
+            <PlusButton onPress={navigation.getParam("showModal")} />
+          ),
+        };
       },
     },
     SelectedGuests: {
