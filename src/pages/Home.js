@@ -133,6 +133,7 @@ function Home({ navigation }) {
     Animated.timing(slideAnim, {
       toValue: 0,
       duration: 2500,
+      useNativeDriver: false,
     }).start();
 
     BackHandler.addEventListener("hardwareBackPress", backAction);
