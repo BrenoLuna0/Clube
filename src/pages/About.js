@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Image, Alert, AsyncStorage } from "react-native";
+import { View, Alert, AsyncStorage } from "react-native";
 import LineInformation from "../components/LineInformation/LineInformation";
 import LogouButton from "../components/LogoutButton/LogoutButton";
 import LineDates from "../components/LineDates/LineDates";

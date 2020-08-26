@@ -22,6 +22,38 @@ function Login({ navigation }) {
   ];
   const refScroll = useRef(null);
 
+  const handleButtonClick = async () => {
+    if (numTitulo === "" || senha === "") {
+      Alert.alert("Atenção", "Preencha os campos para fazer login", [
+        {
+          text: "Ok",
+        },
+      ]);
+    } else {
+      setModalVisibility(true);
+      const result = await onSignIn(numTitulo, senha);
+      if (result) {
+        setSecureText(true);
+        senha === "taliberado"
+          ? navigation.navigate("Home", {
+              warningPass: true,
+              messageCount: result,
+            })
+          : navigation.navigate("Home", { messageCount: result });
+        setModalVisibility(false);
+        setNumTitulo("");
+        setSenha("");
+      } else {
+        Alert.alert("Atenção", "Número do Titular/CPF ou Senha inválidos", [
+          {
+            text: "Ok",
+            onPress: setModalVisibility(false),
+          },
+        ]);
+      }
+    }
+  };
+
   useEffect(() => {
     Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
 
@@ -87,40 +119,8 @@ function Login({ navigation }) {
         </View>
 
         <DefaultButton
-          onPress={async () => {
-            if (numTitulo === "" || senha === "") {
-              Alert.alert("Atenção", "Preencha os campos para fazer login", [
-                {
-                  text: "Ok",
-                },
-              ]);
-            } else {
-              setModalVisibility(true);
-              const result = await onSignIn(numTitulo, senha);
-              if (result) {
-                setSecureText(true);
-                senha === "taliberado"
-                  ? navigation.navigate("Home", {
-                      warningPass: true,
-                      messageCount: result,
-                    })
-                  : navigation.navigate("Home", { messageCount: result });
-                setModalVisibility(false);
-                setNumTitulo("");
-                setSenha("");
-              } else {
-                Alert.alert(
-                  "Atenção",
-                  "Número do Titular/CPF ou Senha inválidos",
-                  [
-                    {
-                      text: "Ok",
-                      onPress: setModalVisibility(false),
-                    },
-                  ]
-                );
-              }
-            }
+          onPress={() => {
+            handleButtonClick();
           }}
           title={"ENTRAR"}
         />

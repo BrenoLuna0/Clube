@@ -24,10 +24,6 @@ function Guests({ navigation }) {
   const [update, setUpdate] = useState(false);
   const [agenCodigo, setAgenCodigo] = useState(0);
 
-  /*const setTablelalal = ()=>{
-    setTableData(tableData=>({...tableData, [id] : undefined}))
-  }*/
-
   const dias = [
     "DOMINGO",
     "SEGUNDA-FEIRA",
@@ -291,7 +287,6 @@ function Guests({ navigation }) {
       handleCheckboxClick(index);
     }
     const token = await AsyncStorage.getItem("token");
-    //setModalVisibility(true);
     await api
       .delete(`/convidado/${convCodigo}`, {
         headers: { "x-access-token": token },

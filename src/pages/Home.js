@@ -68,11 +68,10 @@ function Home({ navigation }) {
     );
   }
 
-  function mainExample(number, title) {
+  function mainExample() {
     return (
       <View style={styles.exampleContainer}>
         <Carousel
-          //ref={c => _slider1Ref = c}
           data={ENTRIES1}
           renderItem={_renderItemWithParallax}
           sliderWidth={sliderWidth}
@@ -81,7 +80,6 @@ function Home({ navigation }) {
           firstItem={SLIDER_1_FIRST_ITEM}
           inactiveSlideScale={0.94}
           inactiveSlideOpacity={0.7}
-          // inactiveSlideShift={20}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
           loop={true}
@@ -105,10 +103,7 @@ function Home({ navigation }) {
     }
   }
 
-  const example1 = mainExample(
-    1,
-    "Default layout | Loop | Autoplay | Parallax | Scale | Opacity | Pagination with tappable dots"
-  );
+  const example1 = mainExample();
 
   useEffect(() => {
     if (navigation.state.params.warningPass === true) {
